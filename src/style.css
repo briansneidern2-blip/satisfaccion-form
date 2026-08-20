@@ -1,35 +1,35 @@
 /* ==========================================================================
    SISTEMA DE DISEÑO INSTITUCIONAL - COLEGIO NTRA. SRA. DE NAZARETH
-   ENCUESTA INTERACTIVA DE ADMISIONES Y PROSPECTOS
+   TEMA CLARO / PALETA BLANCA MODERNA Y ELEGANTE
    ========================================================================== */
 
 :root {
-  --bg-main: #0b172a;
-  --bg-gradient-top: #0a1527;
-  --bg-gradient-bottom: #0e203a;
+  --bg-main: #f8fafc;
+  --bg-gradient-top: #ffffff;
+  --bg-gradient-bottom: #f1f5f9;
   
-  --card-bg: #12243e;
-  --card-border: #1e3a63;
-  --card-hover-border: #2e548a;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-hover-border: #cbd5e1;
 
-  --input-bg: #192d4b;
-  --input-border: #27436b;
-  --input-focus-border: #38bdf8;
-  --input-focus-glow: rgba(56, 189, 248, 0.25);
+  --input-bg: #f8fafc;
+  --input-border: #cbd5e1;
+  --input-focus-border: #0284c7;
+  --input-focus-glow: rgba(2, 132, 199, 0.15);
 
-  --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
   --text-muted: #64748b;
-  --text-light-blue: #cbd5e1;
+  --text-light-blue: #0284c7;
 
-  --accent-cyan: #38bdf8;
-  --accent-blue: #2563eb;
+  --accent-cyan: #0284c7;
+  --accent-blue: #1d4ed8;
   --accent-green: #10b981;
-  --accent-pink: #ec4899;
+  --accent-pink: #e11d48;
   
-  --btn-primary-bg: #ffffff;
-  --btn-primary-text: #0b172a;
-  --btn-primary-hover: #f1f5f9;
+  --btn-primary-bg: #0f172a;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #1e293b;
 
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -38,7 +38,7 @@
 
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 15px 35px -5px rgba(15, 23, 42, 0.08), 0 5px 15px rgba(15, 23, 42, 0.04);
 }
 
 .hidden {
@@ -53,7 +53,7 @@
 
 body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(circle at 50% 0%, #162c4e 0%, var(--bg-main) 70%);
+  background: radial-gradient(circle at 50% 0%, #ffffff 0%, var(--bg-main) 70%);
   background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.6;
@@ -84,21 +84,22 @@ h1, h2, h3, .hero-title, .step-title {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(15, 32, 60, 0.8);
+  background: #ffffff;
   border: 1px solid var(--card-border);
   padding: 0.5rem 1.2rem;
   border-radius: var(--radius-full);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--text-light-blue);
+  color: var(--accent-cyan);
   margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
 }
 
 .logo-shield-sm {
   width: 24px;
   height: 24px;
-  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  background: linear-gradient(135deg, #0284c7, #1d4ed8);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -111,9 +112,7 @@ h1, h2, h3, .hero-title, .step-title {
   font-size: 2.4rem;
   line-height: 1.15;
   margin-bottom: 0.8rem;
-  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #0f172a;
 }
 
 .hero-subtitle {
@@ -147,14 +146,14 @@ h1, h2, h3, .hero-title, .step-title {
   left: 4rem;
   right: 4rem;
   height: 3px;
-  background: var(--input-bg);
+  background: #e2e8f0;
   z-index: 1;
 }
 
 .progress-bar-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #38bdf8, #10b981);
+  background: linear-gradient(90deg, #0284c7, #10b981);
   transition: width 0.4s ease;
 }
 
@@ -172,7 +171,7 @@ h1, h2, h3, .hero-title, .step-title {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--input-bg);
+  background: #f1f5f9;
   border: 2px solid var(--card-border);
   color: var(--text-muted);
   display: flex;
@@ -193,10 +192,10 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .step-item.active .step-circle {
-  background: #ffffff;
-  border-color: #ffffff;
-  color: var(--bg-main);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(15, 23, 42, 0.2);
   transform: scale(1.08);
 }
 
@@ -323,6 +322,7 @@ h1, h2, h3, .hero-title, .step-title {
 .input-group textarea:focus {
   outline: none;
   border-color: var(--input-focus-border);
+  background: #ffffff;
   box-shadow: var(--input-focus-glow);
 }
 
@@ -344,7 +344,7 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .card-box {
-  background: var(--input-bg);
+  background: #f8fafc;
   border: 1.5px solid var(--input-border);
   border-radius: var(--radius-md);
   padding: 1.1rem 0.9rem;
@@ -386,14 +386,15 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .radio-card:hover .card-box {
-  border-color: var(--card-hover-border);
+  border-color: var(--accent-cyan);
+  background: #ffffff;
   transform: translateY(-2px);
 }
 
 .radio-card input[type="radio"]:checked + .card-box {
   border-color: var(--accent-green);
-  background: rgba(16, 185, 129, 0.12);
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.08);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.15);
 }
 
 .radio-card input[type="radio"]:checked + .card-box .card-check {
@@ -402,7 +403,7 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .emoji-question-block {
-  background: var(--input-bg);
+  background: #f8fafc;
   border: 1.5px solid var(--input-border);
   border-radius: var(--radius-md);
   padding: 1.2rem;
@@ -426,7 +427,7 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .emoji-btn {
-  background: rgba(255, 255, 255, 0.04);
+  background: #ffffff;
   border: 1.5px solid var(--input-border);
   border-radius: var(--radius-md);
   padding: 0.8rem 0.4rem;
@@ -450,7 +451,7 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .emoji-btn:hover {
-  background: rgba(56, 189, 248, 0.15);
+  background: #f0f9ff;
   border-color: var(--accent-cyan);
 }
 
@@ -459,17 +460,17 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .emoji-btn.active {
-  background: rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.1);
   border-color: var(--accent-green);
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 .emoji-btn.active .emoji-label {
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .tags-section {
-  background: rgba(25, 45, 75, 0.4);
+  background: #f8fafc;
   border: 1.5px solid var(--card-border);
   border-radius: var(--radius-md);
   padding: 1.25rem;
@@ -493,7 +494,7 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .tag-pill {
-  background: var(--input-bg);
+  background: #ffffff;
   border: 1.5px solid var(--input-border);
   color: var(--text-secondary);
   padding: 0.55rem 1rem;
@@ -513,14 +514,14 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .tag-pill.active {
-  background: rgba(16, 185, 129, 0.18);
+  background: rgba(16, 185, 129, 0.12);
   border-color: var(--accent-green);
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .segmented-control {
   display: flex;
-  background: var(--input-bg);
+  background: #f8fafc;
   border: 1.5px solid var(--input-border);
   border-radius: var(--radius-md);
   padding: 0.3rem;
@@ -558,10 +559,10 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .segmented-item input:checked + span {
-  background: #ffffff;
-  color: var(--bg-main);
+  background: #0f172a;
+  color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
 }
 
 .input-group.invalid input,
@@ -570,7 +571,7 @@ h1, h2, h3, .hero-title, .step-title {
 .tags-section.invalid,
 .segmented-control.invalid {
   border-color: var(--accent-pink);
-  box-shadow: 0 0 10px rgba(236, 72, 153, 0.2);
+  box-shadow: 0 0 10px rgba(225, 29, 72, 0.15);
 }
 
 .error-msg {
@@ -611,7 +612,7 @@ h1, h2, h3, .hero-title, .step-title {
 .checkbox-custom {
   width: 20px;
   height: 20px;
-  background: var(--input-bg);
+  background: #ffffff;
   border: 1.5px solid var(--input-border);
   border-radius: 4px;
   flex-shrink: 0;
@@ -653,7 +654,7 @@ h1, h2, h3, .hero-title, .step-title {
   gap: 1rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--card-border);
 }
 
 .btn-primary, .btn-submit {
@@ -669,11 +670,25 @@ h1, h2, h3, .hero-title, .step-title {
   align-items: center;
   gap: 0.6rem;
   transition: var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+}
+
+.btn-primary:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
 }
 
 .btn-submit {
   background: linear-gradient(135deg, #10b981, #059669);
   color: #ffffff;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
 .btn-secondary {
@@ -688,6 +703,10 @@ h1, h2, h3, .hero-title, .step-title {
   gap: 0.5rem;
 }
 
+.btn-secondary:hover {
+  color: var(--text-primary);
+}
+
 .success-screen {
   text-align: center;
   padding: 2rem 1rem;
@@ -696,7 +715,7 @@ h1, h2, h3, .hero-title, .step-title {
 .success-icon-badge {
   width: 84px;
   height: 84px;
-  background: linear-gradient(135deg, #10b981, #38bdf8);
+  background: linear-gradient(135deg, #10b981, #0284c7);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -704,6 +723,7 @@ h1, h2, h3, .hero-title, .step-title {
   font-size: 3rem;
   color: #ffffff;
   margin: 0 auto 1.5rem;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
 }
 
 .success-title {
@@ -720,8 +740,8 @@ h1, h2, h3, .hero-title, .step-title {
 }
 
 .site-footer {
-  background: #081120;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: #ffffff;
+  border-top: 1px solid var(--card-border);
   padding: 1.5rem;
   margin-top: auto;
   text-align: center;
