@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    document.querySelector('.form-card-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function validateStep(step) {
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.stepper-wrapper').style.display = 'none';
     form.style.display = 'none';
     successScreen.classList.remove('hidden');
-    document.querySelector('.form-card-container').scrollIntoView({ behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   // RESTABLECER FORMULARIO
