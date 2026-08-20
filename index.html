@@ -2,16 +2,16 @@
 <html lang="es">
 
 <head>
-  <!-- Configuración de codificación de caracteres en UTF-8 -->
+  <!-- Codificación de caracteres estándar UTF-8 -->
   <meta charset="UTF-8" />
-  <!-- Vista adaptativa para respuesta en móviles, tablets y computadores -->
+  <!-- Adaptación para celulares, tablets y computadores -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Título oficial de la encuesta de satisfacción -->
-  <title>Encuesta de Satisfacción y Atención al Usuario | Colegio Ntra. Sra. de Nazareth</title>
+  <!-- Título oficial simplificado -->
+  <title>¿Cómo fue tu experiencia hoy? | Colegio Ntra. Sra. de Nazareth</title>
   <meta name="description"
-    content="Evaluación de calidad de atención presencial, telefónica y canales virtuales del Colegio Nuestra Señora de Nazareth - Purificación." />
+    content="Encuesta rápida e interactiva de atención a familias y aspirantes del Colegio Nuestra Señora de Nazareth." />
 
-  <!-- Fuentes tipográficas Google Fonts (Outfit y Plus Jakarta Sans) -->
+  <!-- Fuentes Google Fonts (Outfit y Plus Jakarta Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -23,7 +23,7 @@
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- Hoja de estilos compartida con el diseño institucional Navy -->
+  <!-- Hoja de estilos institucionales Navy -->
   <link rel="stylesheet" href="/src/style.css">
 </head>
 
@@ -31,28 +31,25 @@
 
   <main class="main-wrapper">
 
-    <!-- BANNER HERO SUPERIOR DE BIENVENIDA (Se oculta al finalizar el formulario) -->
+    <!-- BANNER HERO SUPERIOR (Se oculta al enviar la encuesta) -->
     <section class="hero-section" id="heroSection">
       <div class="school-header-badge">
         <div class="logo-shield-sm">
-          <i class="fa-solid fa-headset"></i>
+          <i class="fa-solid fa-face-smile"></i>
         </div>
         <span>COLEGIO NTRA. SRA. DE NAZARETH — PURIFICACIÓN</span>
       </div>
-      <div class="badge-pill">
-        <i class="fa-solid fa-comments"></i> ATENCIÓN Y SERVICIO AL USUARIO
-      </div>
-      <h1 class="hero-title">¡Tu opinión nos ayuda a mejorar!</h1>
+      <h1 class="hero-title"> ¡Tu Opinión nos ayuda a mejorar! </h1>
       <p class="hero-subtitle">
-        Queremos brindarte siempre la mejor atención. Cuéntanos cómo fue tu experiencia reciente al comunicarte o
-        visitarnos en nuestras instalaciones.
+        Tu opinión es muy valiosa para nosotros. Ayúdanos respondiendo estas 3 breves preguntas. ¡No te tomará ni 1
+        minuto!
       </p>
     </section>
 
-    <!-- TARJETA CONTENEDORA PRINCIPAL DEL FORMULARIO Y STEPPER -->
+    <!-- CONTENEDOR PRINCIPAL DEL FORMULARIO INTERACTIVO -->
     <div class="form-card-container">
 
-      <!-- BARRA NAVEGADORA PASO A PASO (STEPPER) -->
+      <!-- BARRA NAVEGADORA PASO A PASO (STEPPER DE 3 PASOS) -->
       <div class="stepper-wrapper">
         <div class="progress-bar-background">
           <div class="progress-bar-fill" id="progressFill"></div>
@@ -60,125 +57,100 @@
 
         <div class="step-item active" data-step="1">
           <div class="step-circle">
-            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-child"></i>
             <span class="step-check"><i class="fa-solid fa-check"></i></span>
           </div>
-          <span class="step-label">Datos & Canal</span>
+          <span class="step-label">1. ¿Qué buscas?</span>
         </div>
 
         <div class="step-item" data-step="2">
           <div class="step-circle">
-            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-comments"></i>
             <span class="step-check"><i class="fa-solid fa-check"></i></span>
           </div>
-          <span class="step-label">Evaluación</span>
+          <span class="step-label">2. La Atención</span>
         </div>
 
         <div class="step-item" data-step="3">
           <div class="step-circle">
-            <i class="fa-solid fa-face-smile"></i>
+            <i class="fa-solid fa-heart"></i>
             <span class="step-check"><i class="fa-solid fa-check"></i></span>
           </div>
-          <span class="step-label">Experiencia</span>
-        </div>
-
-        <div class="step-item" data-step="4">
-          <div class="step-circle">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span class="step-check"><i class="fa-solid fa-check"></i></span>
-          </div>
-          <span class="step-label">Sugerencias</span>
+          <span class="step-label">3. Tu Opinión</span>
         </div>
       </div>
 
-      <!-- FORMULARIO MULTI-PASO -->
+      <!-- FORMULARIO INTERACTIVO -->
       <form id="satisfaccionForm" class="form-content" novalidate>
 
-        <!-- ================= PASO 1: DATOS GENERALES Y CANAL DE ATENCIÓN ================= -->
+        <!-- ================= PASO 1: DATOS BÁSICOS Y GRADO ================= -->
         <div class="form-step-page active" id="step1">
           <div class="step-header">
-            <h2 class="step-title">Cuéntanos sobre tu contacto 💬</h2>
-            <p class="step-subtitle">Ingresa tus datos y especifica el medio por el cual te comunicaste o recibiste
-              atención.</p>
+            <h2 class="step-title">¿Para qué grado o nivel buscas información? 🎒</h2>
+            <p class="step-subtitle">Toca una de las opciones para seleccionar el nivel de tu interés:</p>
           </div>
 
-          <div class="grid-2-col">
-            <div class="input-group">
-              <label for="nombreCompleto">Nombre y Apellidos (Opcional)</label>
-              <div class="input-icon-wrapper">
-                <i class="fa-regular fa-user input-icon"></i>
-                <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Ej. María Gómez (Opcional)">
-              </div>
-            </div>
+          <!-- SELECCIÓN INTERACTIVA POR TARJETAS DE NIVELES -->
+          <div class="input-group">
+            <div class="radio-cards-grid" id="gridNiveles">
+              <label class="radio-card">
+                <input type="radio" name="nivelInteres" value="Preescolar" required>
+                <div class="card-box">
+                  <div class="card-icon">🎨</div>
+                  <div class="card-title">Preescolar</div>
+                  <div class="card-desc">Pre-jardin, Jardín, Transición</div>
+                  <i class="fa-solid fa-circle-check card-check"></i>
+                </div>
+              </label>
 
-            <div class="input-group">
-              <label for="tipoUsuario">¿Qué vínculo tienes con el Colegio? <span class="required">*</span></label>
-              <div class="input-icon-wrapper">
-                <i class="fa-solid fa-users input-icon"></i>
-                <select id="tipoUsuario" name="tipoUsuario" required>
-                  <option value="" disabled selected>Selecciona tu perfil...</option>
-                  <option value="Padre / Acudiente">Padre de Familia / Acudiente</option>
-                  <option value="Aspirante / Familia Nueva">Aspirante / Familia Nueva</option>
-                  <option value="Estudiante Actual">Estudiante Actual</option>
-                  <option value="Egresado">Egresado(a)</option>
-                  <option value="Proveedor / Aliado">Proveedor / Aliado Comercial</option>
-                  <option value="Comunidad General">Comunidad General</option>
-                </select>
-              </div>
-              <span class="error-msg">Selecciona tu perfil o vínculo</span>
+              <label class="radio-card">
+                <input type="radio" name="nivelInteres" value="Primaria">
+                <div class="card-box">
+                  <div class="card-icon">📚</div>
+                  <div class="card-title">Primaria</div>
+                  <div class="card-desc">Grado 1° a 5°</div>
+                  <i class="fa-solid fa-circle-check card-check"></i>
+                </div>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="nivelInteres" value="Bachillerato">
+                <div class="card-box">
+                  <div class="card-icon">🧪</div>
+                  <div class="card-title">Bachillerato</div>
+                  <div class="card-desc">Grado 6° a 11°</div>
+                  <i class="fa-solid fa-circle-check card-check"></i>
+                </div>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="nivelInteres" value="Varios Niveles">
+                <div class="card-box">
+                  <div class="card-icon">👨‍👩‍👧‍👦</div>
+                  <div class="card-title">Varios Niveles</div>
+                  <div class="card-desc">Tengo más de un hijo/a</div>
+                  <i class="fa-solid fa-circle-check card-check"></i>
+                </div>
+              </label>
             </div>
+            <span class="error-msg text-center">Por favor elige una opción</span>
           </div>
 
-          <div class="grid-2-col">
+          <div class="grid-2-col" style="margin-top: 1.5rem;">
             <div class="input-group">
-              <label for="canalAtencion">Canal por el cual recibiste atención <span class="required">*</span></label>
-              <div class="input-icon-wrapper">
-                <i class="fa-solid fa-comments input-icon"></i>
-                <select id="canalAtencion" name="canalAtencion" required>
-                  <option value="" disabled selected>Selecciona el canal...</option>
-                  <option value="Presencial">🏫 Atención Presencial en las Instalaciones</option>
-                  <option value="WhatsApp">🟢 Línea WhatsApp Institucional</option>
-                  <option value="Llamada">📞 Llamada Telefónica</option>
-                  <option value="Correo">✉️ Correo Electrónico / Sitio Web</option>
-                </select>
-              </div>
-              <span class="error-msg">Selecciona el canal de atención utilizado</span>
-            </div>
-
-            <div class="input-group">
-              <label for="areaAtendida">Área o Dependencia que te atendió <span class="required">*</span></label>
-              <div class="input-icon-wrapper">
-                <i class="fa-solid fa-building-user input-icon"></i>
-                <select id="areaAtendida" name="areaAtendida" required>
-                  <option value="" disabled selected>Selecciona el área...</option>
-                  <option value="Secretaría Académica">Secretaría Académica</option>
-                  <option value="Tesorería y Pagaduría">Tesorería / Pagaduría</option>
-                  <option value="Admisiones y Matrículas">Admisiones y Matrículas</option>
-                  <option value="Rectoría y Coordinación">Rectoría / Coordinación</option>
-                  <option value="Recepción General">Recepción General / Portería</option>
-                  <option value="Psicorientación / Enfermería">Psicorientación / Enfermería</option>
-                </select>
-              </div>
-              <span class="error-msg">Selecciona el área que te brindó atención</span>
-            </div>
-          </div>
-
-          <div class="grid-2-col">
-            <div class="input-group">
-              <label for="telefono">Teléfono / WhatsApp de Contacto <span class="required">*</span></label>
+              <label for="telefono">Tu Celular o WhatsApp de contacto <span class="required">*</span></label>
               <div class="input-icon-wrapper">
                 <i class="fa-brands fa-whatsapp input-icon"></i>
-                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 300 123 4567 (Mín. 10 dígitos)"
-                  minlength="10" required>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 300 000 0000" minlength="10" required>
               </div>
-              <span class="error-msg">Ingresa un teléfono válido de al menos 10 dígitos</span>
+              <span class="error-msg">Por favor escribe tu número telefónico (mínimo 10 dígitos)</span>
             </div>
 
             <div class="input-group">
-              <label for="correo">Correo Electrónico (Opcional)</label>
+              <label for="nombreCompleto">Tu Nombre (Opcional)</label>
               <div class="input-icon-wrapper">
-                <i class="fa-regular fa-envelope input-icon"></i>
-                <input type="email" id="correo" name="correo" placeholder="correo@ejemplo.com">
+                <i class="fa-regular fa-user input-icon"></i>
+                <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Escribe tu nombre si deseas">
               </div>
             </div>
           </div>
@@ -191,99 +163,86 @@
           </div>
         </div>
 
-        <!-- ================= PASO 2: EVALUACIÓN DE CALIDAD DE ATENCIÓN ================= -->
+        <!-- ================= PASO 2: EVALUACIÓN CON CARITAS EXPRESIVAS ================= -->
         <div class="form-step-page" id="step2">
           <div class="step-header">
-            <h2 class="step-title">Califica nuestro servicio ⭐</h2>
-            <p class="step-subtitle">Evalúa de 1 a 5 los aspectos clave de la atención que recibiste (1 = Insatisfecho,
-              5 = Excelente).</p>
+            <h2 class="step-title">¿Cómo te pareció la atención? 💬</h2>
+            <p class="step-subtitle">Toca la carita que mejor represente cómo te sentiste hoy:</p>
           </div>
 
-          <div class="ratings-grid">
-            <div class="rating-card" id="card_agilidad">
-              <div class="rating-info">
-                <span class="rating-label"><i class="fa-solid fa-stopwatch"></i> Agilidad y Tiempo de Respuesta <span
-                    class="required">*</span></span>
-                <span class="rating-val-display" id="val_agilidad">Sin calificar</span>
-              </div>
-              <div class="star-rating" data-name="agilidad">
-                <button type="button" data-value="1">1</button>
-                <button type="button" data-value="2">2</button>
-                <button type="button" data-value="3">3</button>
-                <button type="button" data-value="4">4</button>
-                <button type="button" data-value="5">5</button>
-              </div>
-              <input type="hidden" name="agilidad" value="">
-              <span class="error-msg">Asigna una calificación</span>
+          <!-- EVALUACIÓN 1: CLARIDAD DE LA INFORMACIÓN -->
+          <div class="emoji-question-block" id="card_claridadInfo">
+            <label class="emoji-question-title">
+              1. ¿Qué tan clara fue la información de precios, matrículas y documentos? <span class="required">*</span>
+            </label>
+            <div class="emoji-options-grid">
+              <button type="button" class="emoji-btn" data-field="claridadInfo" data-val="Excelente">
+                <span class="emoji-face">😄</span>
+                <span class="emoji-label">Súper clara</span>
+              </button>
+              <button type="button" class="emoji-btn" data-field="claridadInfo" data-val="Buena">
+                <span class="emoji-face">🙂</span>
+                <span class="emoji-label">Buena</span>
+              </button>
+              <button type="button" class="emoji-btn" data-field="claridadInfo" data-val="Regular">
+                <span class="emoji-face">😐</span>
+                <span class="emoji-label">Regular</span>
+              </button>
+              <button type="button" class="emoji-btn" data-field="claridadInfo" data-val="Poco clara">
+                <span class="emoji-face">🙁</span>
+                <span class="emoji-label">Poco clara</span>
+              </button>
             </div>
+            <input type="hidden" id="claridadInfo" name="claridadInfo" value="">
+            <span class="error-msg text-center">Toca una carita para responder</span>
+          </div>
 
-            <div class="rating-card" id="card_amabilidad">
-              <div class="rating-info">
-                <span class="rating-label"><i class="fa-solid fa-handshake"></i> Amabilidad, Respeto y Cordialidad <span
-                    class="required">*</span></span>
-                <span class="rating-val-display" id="val_amabilidad">Sin calificar</span>
-              </div>
-              <div class="star-rating" data-name="amabilidad">
-                <button type="button" data-value="1">1</button>
-                <button type="button" data-value="2">2</button>
-                <button type="button" data-value="3">3</button>
-                <button type="button" data-value="4">4</button>
-                <button type="button" data-value="5">5</button>
-              </div>
-              <input type="hidden" name="amabilidad" value="">
-              <span class="error-msg">Asigna una calificación</span>
+          <!-- EVALUACIÓN 2: AMABILIDAD Y TRATO -->
+          <div class="emoji-question-block" id="card_amabilidad">
+            <label class="emoji-question-title">
+              2. ¿Cómo te trató la persona que te atendió? <span class="required">*</span>
+            </label>
+            <div class="emoji-options-grid">
+              <button type="button" class="emoji-btn" data-field="amabilidad" data-val="Muy amable">
+                <span class="emoji-face">❤️</span>
+                <span class="emoji-label">Muy amable</span>
+              </button>
+              <button type="button" class="emoji-btn" data-field="amabilidad" data-val="Bien">
+                <span class="emoji-face">🙂</span>
+                <span class="emoji-label">Bien</span>
+              </button>
+              <button type="button" class="emoji-btn" data-field="amabilidad" data-val="Normal">
+                <span class="emoji-face">😐</span>
+                <span class="emoji-label">Normal</span>
+              </button>
+              <button type="button" class="emoji-btn" data-field="amabilidad" data-val="Frío">
+                <span class="emoji-face">🙁</span>
+                <span class="emoji-label">Distante</span>
+              </button>
             </div>
+            <input type="hidden" id="amabilidad" name="amabilidad" value="">
+            <span class="error-msg text-center">Toca una carita para responder</span>
+          </div>
 
-            <div class="rating-card" id="card_claridad">
-              <div class="rating-info">
-                <span class="rating-label"><i class="fa-solid fa-lightbulb"></i> Claridad de la Información <span
-                    class="required">*</span></span>
-                <span class="rating-val-display" id="val_claridad">Sin calificar</span>
-              </div>
-              <div class="star-rating" data-name="claridad">
-                <button type="button" data-value="1">1</button>
-                <button type="button" data-value="2">2</button>
-                <button type="button" data-value="3">3</button>
-                <button type="button" data-value="4">4</button>
-                <button type="button" data-value="5">5</button>
-              </div>
-              <input type="hidden" name="claridad" value="">
-              <span class="error-msg">Asigna una calificación</span>
+          <!-- NUBE INTERACTIVA DE ASPECTOS DESTACADOS -->
+          <div class="tags-section" id="tagsAspectosSection">
+            <label class="tags-label">
+              👍 ¿Qué fue lo que más te gustó de tu consulta? (Toca lo que quieras) <span class="required">*</span>
+            </label>
+            <div class="tags-cloud">
+              <button type="button" class="tag-pill" data-val="Las instalaciones y salones"><i
+                  class="fa-solid fa-plus"></i> 🏫 Las instalaciones</button>
+              <button type="button" class="tag-pill" data-val="La educación en valores"><i class="fa-solid fa-plus"></i>
+                💛 La educación en valores</button>
+              <button type="button" class="tag-pill" data-val="La atención tan amable"><i class="fa-solid fa-plus"></i>
+                💬 La atención amable</button>
+              <button type="button" class="tag-pill" data-val="La calidad de los profesores"><i
+                  class="fa-solid fa-plus"></i> 🎓 La calidad académica</button>
+              <button type="button" class="tag-pill" data-val="Los precios y facilidades"><i
+                  class="fa-solid fa-plus"></i> 💲 Precios y facilidades</button>
             </div>
-
-            <div class="rating-card" id="card_efectividad">
-              <div class="rating-info">
-                <span class="rating-label"><i class="fa-solid fa-bullseye"></i> Solución o Efectividad en el Trámite
-                  <span class="required">*</span></span>
-                <span class="rating-val-display" id="val_efectividad">Sin calificar</span>
-              </div>
-              <div class="star-rating" data-name="efectividad">
-                <button type="button" data-value="1">1</button>
-                <button type="button" data-value="2">2</button>
-                <button type="button" data-value="3">3</button>
-                <button type="button" data-value="4">4</button>
-                <button type="button" data-value="5">5</button>
-              </div>
-              <input type="hidden" name="efectividad" value="">
-              <span class="error-msg">Asigna una calificación</span>
-            </div>
-
-            <div class="rating-card" id="card_instalaciones">
-              <div class="rating-info">
-                <span class="rating-label"><i class="fa-solid fa-city"></i> Comodidad para comunicarse con el
-                  colegio<span class="required">*</span></span>
-                <span class="rating-val-display" id="val_instalaciones">Sin calificar</span>
-              </div>
-              <div class="star-rating" data-name="instalaciones">
-                <button type="button" data-value="1">1</button>
-                <button type="button" data-value="2">2</button>
-                <button type="button" data-value="3">3</button>
-                <button type="button" data-value="4">4</button>
-                <button type="button" data-value="5">5</button>
-              </div>
-              <input type="hidden" name="instalaciones" value="">
-              <span class="error-msg">Asigna una calificación</span>
-            </div>
+            <input type="hidden" id="aspectosSeleccionados" name="aspectosSeleccionados" value="">
+            <span class="error-msg" id="errAspectos">Toca al menos una opción que te haya gustado</span>
           </div>
 
           <div class="step-actions">
@@ -296,148 +255,83 @@
           </div>
         </div>
 
-        <!-- ================= PASO 3: EXPERIENCIA GENERAL ================= -->
+        <!-- ================= PASO 3: OPINIÓN FINAL Y MATRÍCULA ================= -->
         <div class="form-step-page" id="step3">
           <div class="step-header">
-            <h2 class="step-title">Tu percepción general 🤝</h2>
-            <p class="step-subtitle">Indícanos si tu motivo de contacto fue resuelto y destaca los aspectos positivos.
-            </p>
+            <h2 class="step-title">Tu opinión final 🌟</h2>
+            <p class="step-subtitle">Dinos qué piensas hacer y déjanos cualquier comentario:</p>
           </div>
 
           <div class="input-group">
-            <label class="label-centered">¿Tu solicitud o consulta fue resuelta satisfactoriamente? <span
+            <label class="label-centered">¿Te gustaría matricular a tu hijo(a) en nuestro colegio? <span
                 class="required">*</span></label>
-            <div class="segmented-control centered-control" id="controlResuelto">
+            <div class="segmented-control centered-control" id="controlIntencion">
               <label class="segmented-item">
-                <input type="radio" name="solicitudResuelta" value="Sí, totalmente" required>
-                <span><i class="fa-solid fa-circle-check"></i> Sí, totalmente</span>
+                <input type="radio" name="intencionMatricula" value="¡Sí, nos encantó!" required>
+                <span>🌟 ¡Sí, nos encantó!</span>
               </label>
               <label class="segmented-item">
-                <input type="radio" name="solicitudResuelta" value="Parcialmente">
-                <span><i class="fa-solid fa-circle-minus"></i> Parcialmente</span>
+                <input type="radio" name="intencionMatricula" value="Lo estamos pensando">
+                <span>🤔 Lo estamos pensando</span>
               </label>
               <label class="segmented-item">
-                <input type="radio" name="solicitudResuelta" value="No fue resuelta">
-                <span><i class="fa-solid fa-circle-xmark"></i> No fue resuelta</span>
+                <input type="radio" name="intencionMatricula" value="No por ahora">
+                <span>❌ No por ahora</span>
               </label>
             </div>
-            <span class="error-msg text-center">Selecciona una opción</span>
+            <span class="error-msg text-center">Por favor elige una opción</span>
           </div>
 
-          <!-- NUBE DE ASPECTOS DESTACADOS -->
-          <div class="tags-section" id="tagsAspectosSection">
-            <label class="tags-label">
-              <i class="fa-solid fa-thumbs-up"></i> ¿Qué aspectos positivos destacarías de la atención? (Selecciona al
-              menos uno) <span class="required">*</span>
+          <div class="input-group" style="margin-top: 1.5rem;">
+            <label for="comentariosSugerencias">
+              <i class="fa-regular fa-comment-dots"></i> ¿Tienes algún mensaje o sugerencia para nosotros? (Opcional)
             </label>
-            <div class="tags-cloud" id="aspectosCloud">
-              <button type="button" class="tag-pill" data-val="Excelente trato y amabilidad"><i
-                  class="fa-solid fa-plus"></i> Amabilidad</button>
-              <button type="button" class="tag-pill" data-val="Rapidez en la respuesta"><i class="fa-solid fa-plus"></i>
-                Rapidez</button>
-              <button type="button" class="tag-pill" data-val="Información clara y precisa"><i
-                  class="fa-solid fa-plus"></i> Información Clara</button>
-              <button type="button" class="tag-pill" data-val="Empatía y disposición"><i class="fa-solid fa-plus"></i>
-                Empatía</button>
-              <button type="button" class="tag-pill" data-val="Instalaciones cómodas y limpias"><i
-                  class="fa-solid fa-plus"></i> Instalaciones Cómodas</button>
-              <button type="button" class="tag-pill" data-val="Facilidad por WhatsApp"><i class="fa-solid fa-plus"></i>
-                Atención por WhatsApp</button>
-              <button type="button" class="tag-pill" data-val="Solución efectiva"><i class="fa-solid fa-plus"></i>
-                Solución Eficiente</button>
+            <div class="input-icon-wrapper textarea-wrapper">
+              <textarea id="comentariosSugerencias" name="comentariosSugerencias" rows="3"
+                placeholder="Escribe aquí si tienes alguna duda o consejo..."></textarea>
             </div>
-            <input type="hidden" id="aspectosSeleccionados" name="aspectosSeleccionados" value="">
-            <span class="error-msg" id="errAspectos">Selecciona al menos un aspecto destacado</span>
+          </div>
+
+          <!-- Aceptación obligatoria de tratamiento de datos personales -->
+          <div class="policy-checkbox-container">
+            <label class="custom-checkbox-label">
+              <input type="checkbox" id="aceptaPoliticas" name="aceptaPoliticas" required>
+              <span class="checkbox-custom"></span>
+              <span class="policy-text">
+                Autorizo el uso de mis datos únicamente para recibir información sobre admisiones. <span
+                  class="required">*</span>
+              </span>
+            </label>
+            <span class="error-msg" id="errPoliticas">Debes marcar la casilla para enviar la encuesta</span>
           </div>
 
           <div class="step-actions">
             <button type="button" class="btn-secondary btn-prev" data-prev="2">
               <i class="fa-solid fa-arrow-left"></i> Anterior
             </button>
-            <button type="button" class="btn-primary btn-next" data-next="4">
-              Siguiente <i class="fa-solid fa-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- ================= PASO 4: RECOMENDACIÓN Y SUGERENCIAS ================= -->
-        <div class="form-step-page" id="step4">
-          <div class="step-header">
-            <h2 class="step-title">Sugerencias para mejorar 🚀</h2>
-            <p class="step-subtitle">Tu retroalimentación es clave para seguir elevando la calidad de nuestro servicio.
-            </p>
-          </div>
-
-          <div class="input-group">
-            <label class="label-centered">¿Recomendarías nuestros canales de atención a otros usuarios? <span
-                class="required">*</span></label>
-            <div class="segmented-control centered-control" id="controlRecomendariaServicio">
-              <label class="segmented-item">
-                <input type="radio" name="recomendariaServicio" value="Sí, totalmente" required>
-                <span><i class="fa-solid fa-star"></i> Sí, totalmente</span>
-              </label>
-              <label class="segmented-item">
-                <input type="radio" name="recomendariaServicio" value="Tal vez">
-                <span><i class="fa-solid fa-circle-question"></i> Tal vez</span>
-              </label>
-              <label class="segmented-item">
-                <input type="radio" name="recomendariaServicio" value="No">
-                <span><i class="fa-solid fa-thumbs-down"></i> No</span>
-              </label>
-            </div>
-            <span class="error-msg text-center">Selecciona una opción</span>
-          </div>
-
-          <div class="input-group">
-            <label for="comentariosSugerencias">
-              <i class="fa-regular fa-comment-dots"></i> Comentarios adicionales o sugerencias de mejora (Opcional)
-            </label>
-            <div class="input-icon-wrapper textarea-wrapper">
-              <textarea id="comentariosSugerencias" name="comentariosSugerencias" rows="4"
-                placeholder="Déjanos tus observaciones, felicitaciones a algún colaborador o sugerencias concretas para mejorar la atención..."></textarea>
-            </div>
-          </div>
-
-          <!-- Aceptación de políticas de protección de datos -->
-          <div class="policy-checkbox-container">
-            <label class="custom-checkbox-label">
-              <input type="checkbox" id="aceptaPoliticas" name="aceptaPoliticas" required>
-              <span class="checkbox-custom"></span>
-              <span class="policy-text">
-                Acepto la <a href="#politica" class="link-highlight">política de tratamiento de datos personales</a> de
-                acuerdo con la Ley de Habeas Data. <span class="required">*</span>
-              </span>
-            </label>
-            <span class="error-msg" id="errPoliticas">Debes aceptar las políticas para enviar la evaluación</span>
-          </div>
-
-          <div class="step-actions">
-            <button type="button" class="btn-secondary btn-prev" data-prev="3">
-              <i class="fa-solid fa-arrow-left"></i> Anterior
-            </button>
             <button type="submit" class="btn-submit" id="btnSubmitForm">
-              <span>Enviar Evaluación</span> <i class="fa-solid fa-paper-plane"></i>
+              <span>Enviar Encuesta</span> <i class="fa-solid fa-paper-plane"></i>
             </button>
           </div>
         </div>
 
       </form>
 
-      <!-- ================= PANTALLA DE ÉXITO ================= -->
+      <!-- ================= PANTALLA DE ÉXITO DE AGRADECIMIENTO ================= -->
       <div class="success-screen hidden" id="successScreen">
         <div class="success-card">
           <div class="success-icon-badge">
-            <i class="fa-solid fa-heart-circle-check"></i>
+            <i class="fa-solid fa-heart"></i>
           </div>
-          <h2 class="success-title">¡Gracias por ayudarnos a mejorar! 💙</h2>
+          <h2 class="success-title">¡Muchas Gracias por tu Visita! 💙</h2>
           <p class="success-desc">
-            Tu evaluación ha sido registrada satisfactoriamente. Trabajamos día a día para brindarte la atención
-            excelente que mereces en la familia Nazarena.
+            Tus respuestas nos ayudan a atender siempre con alegría y cariño a cada familia que se acerca al Colegio
+            Nazareth.
           </p>
 
           <div class="success-actions">
             <button type="button" class="btn-primary" id="btnResetForm">
-              <i class="fa-solid fa-rotate-left"></i> Registrar otra respuesta
+              <i class="fa-solid fa-rotate-left"></i> Responder otra vez
             </button>
           </div>
         </div>

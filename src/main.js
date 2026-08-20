@@ -1,11 +1,11 @@
 /**
- * LÓGICA PRINCIPAL - ENCUESTA DE SATISFACCIÓN Y ATENCIÓN AL USUARIO
+ * LÓGICA PRINCIPAL - ENCUESTA INTERACTIVA DE ADMISIONES Y ATENCIÓN A PROSPECTOS
  * Colegio Nuestra Señora de Nazareth - Purificación
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   let currentStep = 1;
-  const totalSteps = 4;
+  const totalSteps = 3;
 
   const form = document.getElementById('satisfaccionForm');
   const progressFill = document.getElementById('progressFill');
@@ -16,40 +16,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroSection = document.querySelector('.hero-section');
 
   // =========================================================================
-  // 1. STAR RATINGS
+  // 1. MANEJO INTERACTIVO DE BOTONES DE CARITAS (EMOJIS)
   // =========================================================================
-  const ratingTextLabels = {
-    1: '1 - Insatisfecho',
-    2: '2 - Regular',
-    3: '3 - Aceptable',
-    4: '4 - Bueno',
-    5: '5 - Excelente'
-  };
+  const emojiButtons = document.querySelectorAll('.emoji-btn');
+  emojiButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const fieldName = btn.getAttribute('data-field');
+      const value = btn.getAttribute('data-val');
 
-  document.querySelectorAll('.star-rating').forEach(ratingGroup => {
-    const hiddenName = ratingGroup.getAttribute('data-name');
-    const hiddenInput = document.querySelector(`input[name="${hiddenName}"]`);
-    const displayEl = document.getElementById(`val_${hiddenName}`);
-    const ratingCard = document.getElementById(`card_${hiddenName}`);
-    const buttons = ratingGroup.querySelectorAll('button');
+      // Desmarcar otros botones del mismo grupo
+      document.querySelectorAll(`.emoji-btn[data-field="${fieldName}"]`).forEach(b => b.classList.remove('active'));
+      
+      // Marcar botón activo
+      btn.classList.add('active');
 
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const val = btn.getAttribute('data-value');
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        if (hiddenInput) hiddenInput.value = val;
-        if (displayEl) {
-          displayEl.textContent = ratingTextLabels[val] || val;
-          displayEl.classList.add('rated');
-        }
-        if (ratingCard) ratingCard.classList.remove('invalid');
-      });
+      // Actualizar el input oculto correspondiente
+      const hiddenInput = document.getElementById(fieldName);
+      if (hiddenInput) {
+        hiddenInput.value = value;
+      }
+
+      // Remover estado inválido de la tarjeta si existía
+      const cardBlock = document.getElementById(`card_${fieldName}`);
+      if (cardBlock) {
+        cardBlock.classList.remove('invalid');
+      }
     });
   });
 
   // =========================================================================
-  // 2. TAG CLOUD ASPECTOS DESTACADOS
+  // 2. NUBE INTERACTIVA DE ETIQUETAS DE ASPECTOS DESTACADOS
   // =========================================================================
   const tagPills = document.querySelectorAll('.tag-pill');
   const hiddenAspectos = document.getElementById('aspectosSeleccionados');
@@ -75,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 3. STEPPER & VALIDATION
+  // 3. STEPPER Y VALIDACIÓN DE PASOS
   // =========================================================================
   function updateStepper(step) {
     currentStep = step;
@@ -112,21 +108,23 @@ document.addEventListener('DOMContentLoaded', () => {
   function validateStep(step) {
     let isValid = true;
 
+    // Paso 1: Nivel de interés y teléfono de contacto
     if (step === 1) {
-      ['tipoUsuario', 'canalAtencion', 'areaAtendida'].forEach(id => {
-        const el = document.getElementById(id);
-        const parent = el ? el.closest('.input-group') : null;
-        if (!el || !el.value) {
-          if (parent) parent.classList.add('invalid');
-          isValid = false;
-        } else {
-          if (parent) parent.classList.remove('invalid');
-        }
-      });
+      const rNivel = document.querySelectorAll('input[name="nivelInteres"]');
+      const checkedNivel = Array.from(rNivel).some(r => r.checked);
+      const gridNiveles = document.getElementById('gridNiveles').closest('.input-group');
+      
+      if (!checkedNivel) {
+        gridNiveles.classList.add('invalid');
+        isValid = false;
+      } else {
+        gridNiveles.classList.remove('invalid');
+      }
 
       const elTel = document.getElementById('telefono');
       const parentTel = elTel ? elTel.closest('.input-group') : null;
       const digitsOnly = elTel ? elTel.value.replace(/\D/g, '') : '';
+
       if (!elTel || !elTel.value || digitsOnly.length < 10) {
         if (parentTel) parentTel.classList.add('invalid');
         isValid = false;
@@ -135,10 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
+    // Paso 2: Evaluación con caritas y aspectos destacados
     if (step === 2) {
-      ['agilidad', 'amabilidad', 'claridad', 'efectividad', 'instalaciones'].forEach(name => {
-        const input = document.querySelector(`input[name="${name}"]`);
-        const card = document.getElementById(`card_${name}`);
+      ['claridadInfo', 'amabilidad'].forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        const card = document.getElementById(`card_${fieldId}`);
         if (!input || !input.value) {
           if (card) card.classList.add('invalid');
           isValid = false;
@@ -146,18 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if (card) card.classList.remove('invalid');
         }
       });
-    }
-
-    if (step === 3) {
-      const rRes = document.querySelectorAll('input[name="solicitudResuelta"]');
-      const checkedRes = Array.from(rRes).some(r => r.checked);
-      const ctrlRes = document.getElementById('controlResuelto');
-      if (!checkedRes) {
-        ctrlRes.classList.add('invalid');
-        isValid = false;
-      } else {
-        ctrlRes.classList.remove('invalid');
-      }
 
       if (!hiddenAspectos.value || hiddenAspectos.value.trim() === '') {
         if (tagsSection) tagsSection.classList.add('invalid');
@@ -198,34 +185,64 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 4. SUBMIT FORM
+  // 4. ENVÍO DE DATOS Y CONEXIÓN CON GOOGLE SHEETS (GOOGLE DRIVE)
   // =========================================================================
-  form.addEventListener('submit', (e) => {
+  // URL oficial de Google Apps Script para guardar respuestas en Google Sheets
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUWb2c8hzk2tSaKfbCzBs5wW20O2vCxGweH1WOsdsLkbhvXgt14eR0SvKc4s9Q9MuQ/exec";
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    let step4Valid = true;
+    let step3Valid = true;
 
-    const rRec = document.querySelectorAll('input[name="recomendariaServicio"]');
-    const checkedRec = Array.from(rRec).some(r => r.checked);
-    const ctrlRec = document.getElementById('controlRecomendariaServicio');
-    if (!checkedRec) {
-      ctrlRec.classList.add('invalid');
-      step4Valid = false;
+    const rInt = document.querySelectorAll('input[name="intencionMatricula"]');
+    const checkedInt = Array.from(rInt).some(r => r.checked);
+    const ctrlInt = document.getElementById('controlIntencion');
+    if (!checkedInt) {
+      ctrlInt.classList.add('invalid');
+      step3Valid = false;
     } else {
-      ctrlRec.classList.remove('invalid');
+      ctrlInt.classList.remove('invalid');
     }
 
     const aceptaPoliticas = document.getElementById('aceptaPoliticas');
     const policyContainer = aceptaPoliticas.closest('.policy-checkbox-container');
     if (!aceptaPoliticas.checked) {
       policyContainer.classList.add('invalid');
-      step4Valid = false;
+      step3Valid = false;
     } else {
       policyContainer.classList.remove('invalid');
     }
 
-    if (!step4Valid) return;
+    if (!step3Valid) return;
 
+    // Recopilar datos para guardar en Google Sheets
+    const payload = {
+      nivelInteres: document.querySelector('input[name="nivelInteres"]:checked')?.value || '',
+      telefono: document.getElementById('telefono').value || '',
+      nombreCompleto: document.getElementById('nombreCompleto').value || 'Anónimo',
+      claridadInfo: document.getElementById('claridadInfo').value || '',
+      amabilidad: document.getElementById('amabilidad').value || '',
+      aspectosSeleccionados: document.getElementById('aspectosSeleccionados').value || '',
+      intencionMatricula: document.querySelector('input[name="intencionMatricula"]:checked')?.value || '',
+      comentariosSugerencias: document.getElementById('comentariosSugerencias').value || ''
+    };
+
+    // Si colocaron la URL de Google Script, enviar la información a Google Sheets
+    if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.trim() !== '') {
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn('Advertencia al enviar a Google Sheets:', err);
+      }
+    }
+
+    // Ocultar banner hero y mostrar pantalla de éxito
     if (heroSection) heroSection.classList.add('hidden');
 
     document.querySelector('.stepper-wrapper').style.display = 'none';
@@ -234,18 +251,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.form-card-container').scrollIntoView({ behavior: 'smooth' });
   });
 
-  // RESET
+  // RESTABLECER FORMULARIO
   if (btnResetForm) {
     btnResetForm.addEventListener('click', () => {
       form.reset();
 
       if (heroSection) heroSection.classList.remove('hidden');
 
-      document.querySelectorAll('.star-rating button').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.rating-val-display').forEach(d => {
-        d.textContent = "Sin calificar";
-        d.classList.remove('rated');
-      });
+      document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('input[type="hidden"]').forEach(h => {
         if (h.name !== 'aspectosSeleccionados') h.value = '';
       });
@@ -263,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  form.querySelectorAll('input, select, textarea').forEach(input => {
+  form.querySelectorAll('input, textarea').forEach(input => {
     input.addEventListener('input', () => {
       const parent = input.closest('.input-group');
       if (parent) parent.classList.remove('invalid');

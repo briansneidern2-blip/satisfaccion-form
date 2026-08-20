@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * COMPONENTE REACT / NEXT.JS - ENCUESTA DE SATISFACCIÓN Y ATENCIÓN AL USUARIO
+ * COMPONENTE REACT / NEXT.JS - ENCUESTA INTERACTIVA DE ADMISIONES Y PROSPECTOS
  * Colegio Nuestra Señora de Nazareth - Purificación
  */
 
@@ -12,20 +12,13 @@ export default function SatisfaccionPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [formData, setFormData] = useState({
-    nombreCompleto: '',
-    tipoUsuario: '',
-    canalAtencion: '',
-    areaAtendida: '',
+    nivelInteres: '',
     telefono: '',
-    correo: '',
-    agilidad: '',
+    nombreCompleto: '',
+    claridadInfo: '',
     amabilidad: '',
-    claridad: '',
-    efectividad: '',
-    instalaciones: '',
-    solicitudResuelta: '',
     aspectosSeleccionados: [],
-    recomendariaServicio: '',
+    intencionMatricula: '',
     comentariosSugerencias: '',
     aceptaPoliticas: false
   });
@@ -51,21 +44,14 @@ export default function SatisfaccionPage() {
     let valid = true;
 
     if (currentStep === 1) {
-      if (!formData.tipoUsuario) { errs.tipoUsuario = true; valid = false; }
-      if (!formData.canalAtencion) { errs.canalAtencion = true; valid = false; }
-      if (!formData.areaAtendida) { errs.areaAtendida = true; valid = false; }
+      if (!formData.nivelInteres) { errs.nivelInteres = true; valid = false; }
       const telDigits = formData.telefono.replace(/\D/g, '');
       if (!formData.telefono || telDigits.length < 10) { errs.telefono = true; valid = false; }
     }
 
     if (currentStep === 2) {
-      ['agilidad', 'amabilidad', 'claridad', 'efectividad', 'instalaciones'].forEach(r => {
-        if (!formData[r]) { errs[r] = true; valid = false; }
-      });
-    }
-
-    if (currentStep === 3) {
-      if (!formData.solicitudResuelta) { errs.solicitudResuelta = true; valid = false; }
+      if (!formData.claridadInfo) { errs.claridadInfo = true; valid = false; }
+      if (!formData.amabilidad) { errs.amabilidad = true; valid = false; }
       if (!formData.aspectosSeleccionados || formData.aspectosSeleccionados.length === 0) {
         errs.aspectosSeleccionados = true;
         valid = false;
@@ -88,17 +74,43 @@ export default function SatisfaccionPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleSubmit = (e) => {
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUWb2c8hzk2tSaKfbCzBs5wW20O2vCxGweH1WOsdsLkbhvXgt14eR0SvKc4s9Q9MuQ/exec";
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     let valid = true;
 
-    if (!formData.recomendariaServicio) { errs.recomendariaServicio = true; valid = false; }
+    if (!formData.intencionMatricula) { errs.intencionMatricula = true; valid = false; }
     if (!formData.aceptaPoliticas) { errs.aceptaPoliticas = true; valid = false; }
 
     if (!valid) {
       setErrors(errs);
       return;
+    }
+
+    // Enviar las respuestas a Google Sheets
+    if (GOOGLE_SCRIPT_URL) {
+      try {
+        const payload = {
+          nivelInteres: formData.nivelInteres || '',
+          telefono: formData.telefono || '',
+          nombreCompleto: formData.nombreCompleto || 'Anónimo',
+          claridadInfo: formData.claridadInfo || '',
+          amabilidad: formData.amabilidad || '',
+          aspectosSeleccionados: (formData.aspectosSeleccionados || []).join(','),
+          intencionMatricula: formData.intencionMatricula || '',
+          comentariosSugerencias: formData.comentariosSugerencias || ''
+        };
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn('Error al conectar con Google Sheets:', err);
+      }
     }
 
     setIsSubmitted(true);
@@ -109,44 +121,43 @@ export default function SatisfaccionPage() {
     setIsSubmitted(false);
     setCurrentStep(1);
     setFormData({
-      nombreCompleto: '', tipoUsuario: '', canalAtencion: '', areaAtendida: '',
-      telefono: '', correo: '', agilidad: '', amabilidad: '', claridad: '',
-      efectividad: '', instalaciones: '', solicitudResuelta: '', aspectosSeleccionados: [],
-      recomendariaServicio: '', comentariosSugerencias: '', aceptaPoliticas: false
+      nivelInteres: '', telefono: '', nombreCompleto: '',
+      claridadInfo: '', amabilidad: '', aspectosSeleccionados: [],
+      intencionMatricula: '', comentariosSugerencias: '', aceptaPoliticas: false
     });
     setErrors({});
   };
 
   return (
     <div style={{ background: 'radial-gradient(circle at 50% 0%, #162c4e 0%, #0b172a 70%)', color: '#ffffff', minHeight: '100vh', padding: '2rem 1.25rem' }}>
-      <main style={{ maxWidth: '920px', margin: '0 auto' }}>
+      <main style={{ maxWidth: '860px', margin: '0 auto' }}>
         
-        {/* HERO BANNER (Se oculta al enviar) */}
+        {/* BANNER HERO SUPERIOR (Se oculta al enviar) */}
         {!isSubmitted && (
           <section style={{ textAlign: 'center', marginBottom: '2.2rem' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(15, 32, 60, 0.8)', border: '1px solid #1e3a63', padding: '0.5rem 1.2rem', borderRadius: '9999px', fontSize: '0.78rem', fontWeight: 700, color: '#cbd5e1', marginBottom: '1.2rem' }}>
-              <i className="fa-solid fa-headset" style={{ color: '#38bdf8' }}></i>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(15, 32, 60, 0.8)', border: '1px solid #1e3a63', padding: '0.5rem 1.2rem', borderRadius: '9999px', fontSize: '0.78rem', fontWeight: 700, color: '#cbd5e1', marginBottom: '1rem' }}>
+              <i className="fa-solid fa-face-smile" style={{ color: '#38bdf8' }}></i>
               <span>COLEGIO NTRA. SRA. DE NAZARETH — PURIFICACIÓN</span>
             </div>
             <div style={{ display: 'block', fontSize: '2.2rem', fontWeight: 800, margin: '0.5rem 0', color: '#ffffff' }}>
-              ¡Tu Opinión nos Ayuda a Mejorar Cada Día!
+              ¡Queremos Saber Cómo te Fue Hoy! 😊
             </div>
-            <p style={{ color: '#94a3b8', fontSize: '1.05rem', maxWidth: '720px', margin: '0 auto' }}>
-              Queremos brindarte siempre la mejor atención. Cuéntanos cómo fue tu experiencia reciente al comunicarte o visitarnos.
+            <p style={{ color: '#94a3b8', fontSize: '1.05rem', maxWidth: '680px', margin: '0 auto' }}>
+              Tu opinión es muy valiosa para nosotros. Ayúdanos respondiendo estas 3 breves preguntas.
             </p>
           </section>
         )}
 
         {/* TARJETA CONTENEDORA */}
-        <div style={{ background: '#12243e', border: '1px solid #1e3a63', borderRadius: '18px', padding: '2.5rem 2rem', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+        <div style={{ background: '#12243e', border: '1px solid #1e3a63', borderRadius: '20px', padding: '2.5rem 2rem', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
           
-          {/* STEPPER */}
+          {/* STEPPER DE 3 PASOS */}
           {!isSubmitted && (
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2.5rem', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: '22px', left: '3.5rem', right: '3.5rem', height: '3px', background: '#192d4b', zIndex: 1 }}>
-                <div style={{ height: '100%', width: `${((currentStep - 1) / 3) * 100}%`, background: 'linear-gradient(90deg, #38bdf8, #10b981)', transition: 'width 0.4s ease' }}></div>
+              <div style={{ position: 'absolute', top: '22px', left: '4rem', right: '4rem', height: '3px', background: '#192d4b', zIndex: 1 }}>
+                <div style={{ height: '100%', width: `${((currentStep - 1) / 2) * 100}%`, background: 'linear-gradient(90deg, #38bdf8, #10b981)', transition: 'width 0.4s ease' }}></div>
               </div>
-              {['Datos & Canal', 'Evaluación', 'Experiencia', 'Sugerencias'].map((label, idx) => {
+              {['1. ¿Qué buscas?', '2. La Atención', '3. Tu Opinión'].map((label, idx) => {
                 const stepNum = idx + 1;
                 const isActive = currentStep === stepNum;
                 const isDone = currentStep > stepNum;
@@ -169,63 +180,36 @@ export default function SatisfaccionPage() {
               {/* PASO 1 */}
               {currentStep === 1 && (
                 <div>
-                  <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Cuéntanos sobre tu contacto 💬</h2>
+                  <h2 style={{ fontSize: '1.5rem', marginBottom: '0.4rem', textAlign: 'center' }}>¿Para qué grado o nivel buscas información? 🎒</h2>
+                  <p style={{ color: '#94a3b8', textAlign: 'center', marginBottom: '1.5rem' }}>Toca una de las opciones:</p>
                   
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '1.25rem' }}>
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.4rem' }}>Nombre y Apellidos (Opcional - Anonimato)</label>
-                      <input type="text" value={formData.nombreCompleto} onChange={e => handleInputChange('nombreCompleto', e.target.value)} placeholder="Ej. María Gómez (Opcional)" style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: '1px solid #27436b', borderRadius: '12px', color: '#fff' }} />
-                    </div>
-
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.4rem' }}>Tipo de Usuario *</label>
-                      <select value={formData.tipoUsuario} onChange={e => handleInputChange('tipoUsuario', e.target.value)} style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: errors.tipoUsuario ? '1px solid #ec4899' : '1px solid #27436b', borderRadius: '12px', color: '#fff' }}>
-                        <option value="">Selecciona tu perfil...</option>
-                        <option value="Padre / Acudiente">Padre / Acudiente</option>
-                        <option value="Aspirante / Familia Nueva">Aspirante / Familia Nueva</option>
-                        <option value="Estudiante Actual">Estudiante Actual</option>
-                        <option value="Egresado">Egresado(a)</option>
-                        <option value="Proveedor / Aliado">Proveedor / Aliado</option>
-                        <option value="Comunidad General">Comunidad General</option>
-                      </select>
-                    </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '0.85rem', marginBottom: '1.5rem' }}>
+                    {[
+                      { val: 'Preescolar', icon: '🎨', title: 'Preescolar', desc: 'Párvulos a Transición' },
+                      { val: 'Primaria', icon: '📚', title: 'Primaria', desc: 'Primero a Quinto' },
+                      { val: 'Bachillerato', icon: '🧪', title: 'Bachillerato', desc: 'Sexto a Undécimo' },
+                      { val: 'Varios Niveles', icon: '👨‍👩‍👧‍👦', title: 'Varios Niveles', desc: 'Más de un hijo/a' }
+                    ].map(item => {
+                      const selected = formData.nivelInteres === item.val;
+                      return (
+                        <button type="button" key={item.val} onClick={() => handleInputChange('nivelInteres', item.val)} style={{ background: selected ? 'rgba(16, 185, 129, 0.15)' : '#192d4b', border: selected ? '2px solid #10b981' : '1px solid #27436b', borderRadius: '14px', padding: '1.1rem 0.9rem', textAlign: 'center', cursor: 'pointer', color: '#fff' }}>
+                          <div style={{ fontSize: '2rem', marginBottom: '0.3rem' }}>{item.icon}</div>
+                          <div style={{ fontWeight: 'bold', fontSize: '0.95rem' }}>{item.title}</div>
+                          <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>{item.desc}</div>
+                        </button>
+                      );
+                    })}
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '1.25rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.4rem' }}>Canal de Atención *</label>
-                      <select value={formData.canalAtencion} onChange={e => handleInputChange('canalAtencion', e.target.value)} style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: errors.canalAtencion ? '1px solid #ec4899' : '1px solid #27436b', borderRadius: '12px', color: '#fff' }}>
-                        <option value="">Selecciona canal...</option>
-                        <option value="Presencial">🏫 Atención Presencial</option>
-                        <option value="WhatsApp">🟢 Línea WhatsApp Institucional</option>
-                        <option value="Llamada">📞 Llamada Telefónica</option>
-                        <option value="Correo">✉️ Correo Electrónico</option>
-                      </select>
+                      <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.4rem' }}>Tu Celular o WhatsApp *</label>
+                      <input type="tel" value={formData.telefono} onChange={e => handleInputChange('telefono', e.target.value)} placeholder="Ej. 300 123 4567 (10 dígitos)" style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: errors.telefono ? '1px solid #ec4899' : '1px solid #27436b', borderRadius: '12px', color: '#fff' }} />
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.4rem' }}>Área Atendida *</label>
-                      <select value={formData.areaAtendida} onChange={e => handleInputChange('areaAtendida', e.target.value)} style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: errors.areaAtendida ? '1px solid #ec4899' : '1px solid #27436b', borderRadius: '12px', color: '#fff' }}>
-                        <option value="">Selecciona área...</option>
-                        <option value="Secretaría Académica">Secretaría Académica</option>
-                        <option value="Tesorería y Pagaduría">Tesorería / Pagaduría</option>
-                        <option value="Admisiones y Matrículas">Admisiones y Matrículas</option>
-                        <option value="Rectoría y Coordinación">Rectoría / Coordinación</option>
-                        <option value="Recepción General">Recepción General</option>
-                        <option value="Psicorientación / Enfermería">Psicorientación</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '1.25rem' }}>
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.4rem' }}>Teléfono (Mín 10 dígitos) *</label>
-                      <input type="tel" value={formData.telefono} onChange={e => handleInputChange('telefono', e.target.value)} placeholder="Ej. 300 123 4567" style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: errors.telefono ? '1px solid #ec4899' : '1px solid #27436b', borderRadius: '12px', color: '#fff' }} />
-                    </div>
-
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.4rem' }}>Correo Electrónico (Opcional)</label>
-                      <input type="email" value={formData.correo} onChange={e => handleInputChange('correo', e.target.value)} placeholder="correo@ejemplo.com" style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: '1px solid #27436b', borderRadius: '12px', color: '#fff' }} />
+                      <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.4rem' }}>Tu Nombre (Opcional)</label>
+                      <input type="text" value={formData.nombreCompleto} onChange={e => handleInputChange('nombreCompleto', e.target.value)} placeholder="Escribe tu nombre si deseas" style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: '1px solid #27436b', borderRadius: '12px', color: '#fff' }} />
                     </div>
                   </div>
 
@@ -240,65 +224,54 @@ export default function SatisfaccionPage() {
               {/* PASO 2 */}
               {currentStep === 2 && (
                 <div>
-                  <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Califica nuestro servicio ⭐</h2>
-                  <p style={{ color: '#94a3b8', marginBottom: '1.5rem' }}>Evalúa de 1 a 5 los aspectos clave de la atención recibida:</p>
+                  <h2 style={{ fontSize: '1.5rem', marginBottom: '0.4rem', textAlign: 'center' }}>¿Cómo te pareció la atención? 💬</h2>
+                  <p style={{ color: '#94a3b8', textAlign: 'center', marginBottom: '1.5rem' }}>Toca la carita que mejor represente cómo te sentiste hoy:</p>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
-                    {[
-                      { key: 'agilidad', label: 'Agilidad y Tiempo de Respuesta' },
-                      { key: 'amabilidad', label: 'Amabilidad, Respeto y Cordialidad' },
-                      { key: 'claridad', label: 'Claridad de la Información' },
-                      { key: 'efectividad', label: 'Solución o Efectividad en el Trámite' },
-                      { key: 'instalaciones', label: 'Comodidad / Disponibilidad del Canal' }
-                    ].map(item => (
-                      <div key={item.key} style={{ background: '#192d4b', padding: '1rem', borderRadius: '12px', border: errors[item.key] ? '1px solid #ec4899' : '1px solid #27436b' }}>
-                        <div style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '0.5rem' }}>{item.label}</div>
-                        <div style={{ display: 'flex', gap: '0.3rem' }}>
-                          {[1, 2, 3, 4, 5].map(star => (
-                            <button type="button" key={star} onClick={() => handleInputChange(item.key, star)} style={{ flex: 1, padding: '0.4rem', background: formData[item.key] === star ? '#38bdf8' : 'rgba(255,255,255,0.05)', color: formData[item.key] === star ? '#0b172a' : '#fff', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' }}>
-                              {star}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2rem' }}>
-                    <button type="button" onClick={prevStep} style={{ background: 'transparent', color: '#cbd5e1', border: 'none', cursor: 'pointer' }}>Anterior</button>
-                    <button type="button" onClick={nextStep} style={{ background: '#ffffff', color: '#0b172a', border: 'none', padding: '0.85rem 2rem', borderRadius: '9999px', fontWeight: 'bold', cursor: 'pointer' }}>Siguiente</button>
-                  </div>
-                </div>
-              )}
-
-              {/* PASO 3 */}
-              {currentStep === 3 && (
-                <div>
-                  <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Tu percepción general 🤝</h2>
-                  
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem' }}>¿Tu solicitud o consulta fue resuelta satisfactoriamente? *</label>
-                    <div style={{ display: 'flex', gap: '1rem', maxWidth: '440px', margin: '0 auto' }}>
-                      {['Sí, totalmente', 'Parcialmente', 'No fue resuelta'].map(v => (
-                        <button type="button" key={v} onClick={() => handleInputChange('solicitudResuelta', v)} style={{ flex: 1, padding: '0.75rem', background: formData.solicitudResuelta === v ? '#fff' : '#192d4b', color: formData.solicitudResuelta === v ? '#0b172a' : '#fff', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                          {v}
+                  <div style={{ background: '#192d4b', border: errors.claridadInfo ? '1px solid #ec4899' : '1px solid #27436b', padding: '1.2rem', borderRadius: '14px', marginBottom: '1.5rem', textAlign: 'center' }}>
+                    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '1rem' }}>1. ¿Qué tan clara fue la información de precios, matrículas y documentos? *</label>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem' }}>
+                      {[
+                        { val: 'Excelente', face: '😄', text: 'Súper clara' },
+                        { val: 'Buena', face: '🙂', text: 'Buena' },
+                        { val: 'Regular', face: '😐', text: 'Regular' },
+                        { val: 'Poco clara', face: '🙁', text: 'Poco clara' }
+                      ].map(em => (
+                        <button type="button" key={em.val} onClick={() => handleInputChange('claridadInfo', em.val)} style={{ background: formData.claridadInfo === em.val ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255,255,255,0.04)', border: formData.claridadInfo === em.val ? '2px solid #10b981' : '1px solid #27436b', borderRadius: '12px', padding: '0.8rem 0.4rem', cursor: 'pointer', color: '#fff' }}>
+                          <div style={{ fontSize: '2rem' }}>{em.face}</div>
+                          <div style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{em.text}</div>
                         </button>
                       ))}
                     </div>
                   </div>
 
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem' }}>¿Qué aspectos positivos destacarías? *</label>
+                  <div style={{ background: '#192d4b', border: errors.amabilidad ? '1px solid #ec4899' : '1px solid #27436b', padding: '1.2rem', borderRadius: '14px', marginBottom: '1.5rem', textAlign: 'center' }}>
+                    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '1rem' }}>2. ¿Cómo te trató la persona que te atendió? *</label>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem' }}>
+                      {[
+                        { val: 'Muy amable', face: '❤️', text: 'Muy amable' },
+                        { val: 'Bien', face: '🙂', text: 'Bien' },
+                        { val: 'Normal', face: '😐', text: 'Normal' },
+                        { val: 'Frío', face: '🙁', text: 'Distante' }
+                      ].map(em => (
+                        <button type="button" key={em.val} onClick={() => handleInputChange('amabilidad', em.val)} style={{ background: formData.amabilidad === em.val ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255,255,255,0.04)', border: formData.amabilidad === em.val ? '2px solid #10b981' : '1px solid #27436b', borderRadius: '12px', padding: '0.8rem 0.4rem', cursor: 'pointer', color: '#fff' }}>
+                          <div style={{ fontSize: '2rem' }}>{em.face}</div>
+                          <div style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{em.text}</div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div style={{ background: 'rgba(25, 45, 75, 0.4)', border: '1px solid #1e3a63', padding: '1.25rem', borderRadius: '14px', marginBottom: '1.5rem' }}>
+                    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.8rem' }}>👍 ¿Qué fue lo que más te gustó de tu consulta? *</label>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                       {[
-                        'Excelente trato y amabilidad', 'Rapidez en la respuesta',
-                        'Información clara y precisa', 'Empatía y disposición',
-                        'Instalaciones cómodas y limpias', 'Facilidad por WhatsApp',
-                        'Solución efectiva'
+                        'Las instalaciones y salones', 'La educación en valores',
+                        'La atención tan amable', 'La calidad de los profesores',
+                        'Los precios y facilidades'
                       ].map(asp => {
                         const active = formData.aspectosSeleccionados.includes(asp);
                         return (
-                          <button type="button" key={asp} onClick={() => handleTagToggle(asp)} style={{ padding: '0.45rem 0.9rem', borderRadius: '9999px', background: active ? 'rgba(16,185,129,0.15)' : '#192d4b', color: active ? '#fff' : '#cbd5e1', border: active ? '1px solid #10b981' : '1px solid #27436b', cursor: 'pointer', fontWeight: 600 }}>
+                          <button type="button" key={asp} onClick={() => handleTagToggle(asp)} style={{ padding: '0.55rem 1rem', borderRadius: '9999px', background: active ? 'rgba(16,185,129,0.18)' : '#192d4b', color: active ? '#fff' : '#cbd5e1', border: active ? '1px solid #10b981' : '1px solid #27436b', cursor: 'pointer', fontWeight: 600 }}>
                             {active ? '✓ ' : '+ '}{asp}
                           </button>
                         );
@@ -313,54 +286,59 @@ export default function SatisfaccionPage() {
                 </div>
               )}
 
-              {/* PASO 4 */}
-              {currentStep === 4 && (
+              {/* PASO 3 */}
+              {currentStep === 3 && (
                 <div>
-                  <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Sugerencias para mejorar 🚀</h2>
-                  
+                  <h2 style={{ fontSize: '1.5rem', marginBottom: '0.4rem', textAlign: 'center' }}>Tu opinión final 🌟</h2>
+                  <p style={{ color: '#94a3b8', textAlign: 'center', marginBottom: '1.5rem' }}>Dinos qué piensas hacer:</p>
+
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem' }}>¿Recomendarías nuestros canales de atención? *</label>
-                    <div style={{ display: 'flex', gap: '1rem', maxWidth: '400px', margin: '0 auto' }}>
-                      {['Sí, totalmente', 'Tal vez', 'No'].map(v => (
-                        <button type="button" key={v} onClick={() => handleInputChange('recomendariaServicio', v)} style={{ flex: 1, padding: '0.75rem', background: formData.recomendariaServicio === v ? '#fff' : '#192d4b', color: formData.recomendariaServicio === v ? '#0b172a' : '#fff', border: 'none', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                          {v}
+                    <label style={{ display: 'block', textAlign: 'center', fontWeight: 'bold', marginBottom: '0.8rem' }}>¿Te gustaría matricular a tu hijo(a) en nuestro colegio? *</label>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.6rem' }}>
+                      {[
+                        { val: '¡Sí, nos encantó!', text: '🌟 ¡Sí, nos encantó!' },
+                        { val: 'Lo estamos pensando', text: '🤔 Lo estamos pensando' },
+                        { val: 'No por ahora', text: '❌ No por ahora' }
+                      ].map(v => (
+                        <button type="button" key={v.val} onClick={() => handleInputChange('intencionMatricula', v.val)} style={{ padding: '0.85rem', background: formData.intencionMatricula === v.val ? '#fff' : '#192d4b', color: formData.intencionMatricula === v.val ? '#0b172a' : '#fff', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer' }}>
+                          {v.text}
                         </button>
                       ))}
                     </div>
                   </div>
 
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.4rem' }}>Comentarios o sugerencias adicionales (Opcional)</label>
-                    <textarea rows="3" value={formData.comentariosSugerencias} onChange={e => handleInputChange('comentariosSugerencias', e.target.value)} placeholder="Escribe tus sugerencias para mejorar el servicio..." style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: '1px solid #27436b', borderRadius: '12px', color: '#fff' }}></textarea>
+                    <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.4rem' }}>¿Tienes algún mensaje o sugerencia para nosotros? (Opcional)</label>
+                    <textarea rows="3" value={formData.comentariosSugerencias} onChange={e => handleInputChange('comentariosSugerencias', e.target.value)} placeholder="Escribe aquí si tienes alguna duda o consejo..." style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: '1px solid #27436b', borderRadius: '12px', color: '#fff' }}></textarea>
                   </div>
 
                   <div style={{ marginBottom: '1.5rem' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                       <input type="checkbox" checked={formData.aceptaPoliticas} onChange={e => handleInputChange('aceptaPoliticas', e.target.checked)} />
-                      <span>Acepto la política de tratamiento de datos personales *</span>
+                      <span>Autorizo el uso de mis datos únicamente para recibir información sobre admisiones. *</span>
                     </label>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2rem' }}>
                     <button type="button" onClick={prevStep} style={{ background: 'transparent', color: '#cbd5e1', border: 'none', cursor: 'pointer' }}>Anterior</button>
-                    <button type="submit" style={{ background: 'linear-gradient(135deg, #10b981, #059669)', color: '#ffffff', border: 'none', padding: '0.85rem 2.5rem', borderRadius: '9999px', fontWeight: 'bold', cursor: 'pointer' }}>Enviar Evaluación</button>
+                    <button type="submit" style={{ background: 'linear-gradient(135deg, #10b981, #059669)', color: '#ffffff', border: 'none', padding: '0.85rem 2.5rem', borderRadius: '9999px', fontWeight: 'bold', cursor: 'pointer' }}>Enviar Encuesta</button>
                   </div>
                 </div>
               )}
 
             </form>
           ) : (
-            /* PANTALLA DE ÉXITO DE AGRADECIMIENTO */
+            /* PANTALLA DE ÉXITO */
             <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
               <div style={{ width: '80px', height: '80px', background: 'linear-gradient(135deg, #10b981, #38bdf8)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', margin: '0 auto 1.5rem' }}>
                 💙
               </div>
-              <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>¡Gracias por ayudarnos a mejorar!</h2>
+              <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>¡Muchas Gracias por tu Visita!</h2>
               <p style={{ color: '#cbd5e1', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto 2rem' }}>
-                Tu evaluación ha sido registrada satisfactoriamente. Trabajamos para brindarte la atención excelente que mereces.
+                Tus respuestas nos ayudan a atender siempre con alegría y cariño a cada familia que se acerca al Colegio Nazareth.
               </p>
               <button type="button" onClick={handleReset} style={{ background: '#ffffff', color: '#0b172a', border: 'none', padding: '0.85rem 2rem', borderRadius: '9999px', fontWeight: 'bold', cursor: 'pointer' }}>
-                Registrar otra evaluación
+                Responder otra vez
               </button>
             </div>
           )}
