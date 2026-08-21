@@ -240,7 +240,21 @@
                   class="fa-solid fa-plus"></i> 🎓 La calidad académica</button>
               <button type="button" class="tag-pill" data-val="Los precios y facilidades"><i
                   class="fa-solid fa-plus"></i> 💲 Precios y facilidades</button>
+              <button type="button" class="tag-pill" data-val="Otras" id="tagOtras"><i
+                  class="fa-solid fa-plus"></i> ✨ Otras...</button>
             </div>
+
+            <!-- Campo desplegable para especificar otra opción -->
+            <div class="input-group hidden" id="wrapperOtrasEspecifique" style="margin-top: 0.9rem;">
+              <label for="otrasEspecifique" style="font-size: 0.85rem; font-weight: 600; color: #cbd5e1;">
+                ¿Qué otra cosa te gustó? Escríbela aquí:
+              </label>
+              <div class="input-icon-wrapper">
+                <i class="fa-solid fa-pen input-icon"></i>
+                <input type="text" id="otrasEspecifique" name="otrasEspecifique" placeholder="Escribe aquí tu respuesta...">
+              </div>
+            </div>
+
             <input type="hidden" id="aspectosSeleccionados" name="aspectosSeleccionados" value="">
             <span class="error-msg" id="errAspectos">Toca al menos una opción que te haya gustado</span>
           </div>
@@ -255,40 +269,20 @@
           </div>
         </div>
 
-        <!-- ================= PASO 3: OPINIÓN FINAL Y MATRÍCULA ================= -->
+        <!-- ================= PASO 3: OPINIÓN FINAL Y SUGERENCIAS ================= -->
         <div class="form-step-page" id="step3">
           <div class="step-header">
             <h2 class="step-title">Tu opinión final 🌟</h2>
-            <p class="step-subtitle">Dinos qué piensas hacer y déjanos cualquier comentario:</p>
+            <p class="step-subtitle">Tu opinión es fundamental para ayudarnos a mejorar cada día:</p>
           </div>
 
           <div class="input-group">
-            <label class="label-centered">¿Te gustaría matricular a tu hijo(a) en nuestro colegio? <span
-                class="required">*</span></label>
-            <div class="segmented-control centered-control" id="controlIntencion">
-              <label class="segmented-item">
-                <input type="radio" name="intencionMatricula" value="¡Sí, nos encantó!" required>
-                <span>🌟 ¡Sí, nos encantó!</span>
-              </label>
-              <label class="segmented-item">
-                <input type="radio" name="intencionMatricula" value="Lo estamos pensando">
-                <span>🤔 Lo estamos pensando</span>
-              </label>
-              <label class="segmented-item">
-                <input type="radio" name="intencionMatricula" value="No por ahora">
-                <span>❌ No por ahora</span>
-              </label>
-            </div>
-            <span class="error-msg text-center">Por favor elige una opción</span>
-          </div>
-
-          <div class="input-group" style="margin-top: 1.5rem;">
-            <label for="comentariosSugerencias">
-              <i class="fa-regular fa-comment-dots"></i> ¿Tienes algún mensaje o sugerencia para nosotros? (Opcional)
+            <label for="comentariosSugerencias" style="line-height: 1.45; margin-bottom: 0.6rem;">
+              <i class="fa-regular fa-comment-dots"></i> De acuerdo con la información que te brindamos y la experiencia con nosotros, por favor enúncianos las oportunidades de mejora.
             </label>
             <div class="input-icon-wrapper textarea-wrapper">
-              <textarea id="comentariosSugerencias" name="comentariosSugerencias" rows="3"
-                placeholder="Escribe aquí si tienes alguna duda o consejo..."></textarea>
+              <textarea id="comentariosSugerencias" name="comentariosSugerencias" rows="4"
+                placeholder="Escribe aquí si tienes alguna sugerencia u oportunidad de mejora..."></textarea>
             </div>
           </div>
 

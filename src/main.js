@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const tagPills = document.querySelectorAll('.tag-pill');
   const hiddenAspectos = document.getElementById('aspectosSeleccionados');
   const tagsSection = document.getElementById('tagsAspectosSection');
+  const wrapperOtras = document.getElementById('wrapperOtrasEspecifique');
+  const inputOtras = document.getElementById('otrasEspecifique');
 
   tagPills.forEach(pill => {
     pill.addEventListener('click', () => {
@@ -61,14 +63,44 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.className = 'fa-solid fa-plus';
       }
 
-      const activeVals = Array.from(document.querySelectorAll('.tag-pill.active')).map(p => p.getAttribute('data-val'));
-      hiddenAspectos.value = activeVals.join(',');
-
-      if (activeVals.length > 0 && tagsSection) {
-        tagsSection.classList.remove('invalid');
+      const val = pill.getAttribute('data-val');
+      if (val === 'Otras') {
+        if (pill.classList.contains('active')) {
+          if (wrapperOtras) {
+            wrapperOtras.classList.remove('hidden');
+            if (inputOtras) inputOtras.focus();
+          }
+        } else {
+          if (wrapperOtras) wrapperOtras.classList.add('hidden');
+          if (inputOtras) inputOtras.value = '';
+        }
       }
+
+      updateAspectosPayload();
     });
   });
+
+  if (inputOtras) {
+    inputOtras.addEventListener('input', () => {
+      updateAspectosPayload();
+    });
+  }
+
+  function updateAspectosPayload() {
+    const activeVals = Array.from(document.querySelectorAll('.tag-pill.active')).map(p => {
+      const v = p.getAttribute('data-val');
+      if (v === 'Otras') {
+        const customText = inputOtras ? inputOtras.value.trim() : '';
+        return customText ? `Otras (${customText})` : 'Otras';
+      }
+      return v;
+    });
+    hiddenAspectos.value = activeVals.join(', ');
+
+    if (activeVals.length > 0 && tagsSection) {
+      tagsSection.classList.remove('invalid');
+    }
+  }
 
   // =========================================================================
   // 3. STEPPER Y VALIDACIÓN DE PASOS
@@ -195,16 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let step3Valid = true;
 
-    const rInt = document.querySelectorAll('input[name="intencionMatricula"]');
-    const checkedInt = Array.from(rInt).some(r => r.checked);
-    const ctrlInt = document.getElementById('controlIntencion');
-    if (!checkedInt) {
-      ctrlInt.classList.add('invalid');
-      step3Valid = false;
-    } else {
-      ctrlInt.classList.remove('invalid');
-    }
-
     const aceptaPoliticas = document.getElementById('aceptaPoliticas');
     const policyContainer = aceptaPoliticas.closest('.policy-checkbox-container');
     if (!aceptaPoliticas.checked) {
@@ -224,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
       claridadInfo: document.getElementById('claridadInfo').value || '',
       amabilidad: document.getElementById('amabilidad').value || '',
       aspectosSeleccionados: document.getElementById('aspectosSeleccionados').value || '',
-      intencionMatricula: document.querySelector('input[name="intencionMatricula"]:checked')?.value || '',
+      intencionMatricula: 'N/A (Removido)',
       comentariosSugerencias: document.getElementById('comentariosSugerencias').value || ''
     };
 

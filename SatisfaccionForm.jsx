@@ -268,16 +268,23 @@ export default function SatisfaccionPage() {
                       {[
                         'Las instalaciones y salones', 'La educación en valores',
                         'La atención tan amable', 'La calidad de los profesores',
-                        'Los precios y facilidades'
+                        'Los precios y facilidades', 'Otras'
                       ].map(asp => {
                         const active = formData.aspectosSeleccionados.includes(asp);
                         return (
                           <button type="button" key={asp} onClick={() => handleTagToggle(asp)} style={{ padding: '0.55rem 1rem', borderRadius: '9999px', background: active ? 'rgba(16,185,129,0.2)' : '#0f203c', color: active ? '#ffffff' : '#cbd5e1', border: active ? '1px solid #10b981' : '1px solid #27436b', cursor: 'pointer', fontWeight: 600 }}>
-                            {active ? '✓ ' : '+ '}{asp}
+                            {active ? '✓ ' : '+ '}{asp === 'Otras' ? '✨ Otras...' : asp}
                           </button>
                         );
                       })}
                     </div>
+
+                    {formData.aspectosSeleccionados.includes('Otras') && (
+                      <div style={{ marginTop: '0.9rem' }}>
+                        <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '0.4rem' }}>¿Qué otra cosa te gustó? Escríbela aquí:</label>
+                        <input type="text" value={formData.otrasTexto || ''} onChange={e => handleInputChange('otrasTexto', e.target.value)} placeholder="Escribe aquí tu respuesta..." style={{ width: '100%', padding: '0.75rem', background: '#0f203c', border: '1px solid #27436b', borderRadius: '10px', color: '#ffffff' }} />
+                      </div>
+                    )}
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '2rem' }}>
@@ -291,26 +298,13 @@ export default function SatisfaccionPage() {
               {currentStep === 3 && (
                 <div>
                   <h2 style={{ fontSize: '1.5rem', marginBottom: '0.4rem', textAlign: 'center', color: '#ffffff' }}>Tu opinión final 🌟</h2>
-                  <p style={{ color: '#94a3b8', textAlign: 'center', marginBottom: '1.5rem' }}>Dinos qué piensas hacer:</p>
+                  <p style={{ color: '#94a3b8', textAlign: 'center', marginBottom: '1.5rem' }}>Tu opinión es fundamental para ayudarnos a mejorar cada día:</p>
 
                   <div style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', textAlign: 'center', fontWeight: 'bold', marginBottom: '0.8rem', color: '#ffffff' }}>¿Te gustaría matricular a tu hijo(a) en nuestro colegio? *</label>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.6rem' }}>
-                      {[
-                        { val: '¡Sí, nos encantó!', text: '🌟 ¡Sí, nos encantó!' },
-                        { val: 'Lo estamos pensando', text: '🤔 Lo estamos pensando' },
-                        { val: 'No por ahora', text: '❌ No por ahora' }
-                      ].map(v => (
-                        <button type="button" key={v.val} onClick={() => handleInputChange('intencionMatricula', v.val)} style={{ padding: '0.85rem', background: formData.intencionMatricula === v.val ? '#ffffff' : '#192d4b', color: formData.intencionMatricula === v.val ? '#0b172a' : '#ffffff', border: '1px solid #27436b', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer' }}>
-                          {v.text}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.4rem', color: '#ffffff' }}>¿Tienes algún mensaje o sugerencia para nosotros? (Opcional)</label>
-                    <textarea rows="3" value={formData.comentariosSugerencias} onChange={e => handleInputChange('comentariosSugerencias', e.target.value)} placeholder="Escribe aquí si tienes alguna duda o consejo..." style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: '1px solid #27436b', borderRadius: '12px', color: '#ffffff' }}></textarea>
+                    <label style={{ display: 'block', fontSize: '0.92rem', lineHeight: '1.45', marginBottom: '0.6rem', color: '#ffffff', fontWeight: 600 }}>
+                      <i className="fa-regular fa-comment-dots"></i> De acuerdo con la información que te brindamos y la experiencia con nosotros, por favor enúncianos las oportunidades de mejora.
+                    </label>
+                    <textarea rows="4" value={formData.comentariosSugerencias} onChange={e => handleInputChange('comentariosSugerencias', e.target.value)} placeholder="Escribe aquí tus sugerencias u oportunidades de mejora..." style={{ width: '100%', padding: '0.85rem', background: '#192d4b', border: '1px solid #27436b', borderRadius: '12px', color: '#ffffff' }}></textarea>
                   </div>
 
                   <div style={{ marginBottom: '1.5rem' }}>
