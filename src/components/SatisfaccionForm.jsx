@@ -110,7 +110,7 @@ export default function SatisfaccionPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwIDGIbFAkMFlA7RZ2ApmVA2LUX9R_XxK8eseD1TLLtzF6_i9FWE6OKGfwUZOelwUCK/exec";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzfh_LXwJC4WA8al5NhR2EqLmJHWZw9MqmEVvBnER2q1GPyXRIpWbGquY8IruXhU6XaA/exec";
 
   const handleSubmit = async (e) => {
     e.preventDefault();

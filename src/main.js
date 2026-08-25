@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Desmarcar otros botones del mismo grupo
       document.querySelectorAll(`.emoji-btn[data-field="${fieldName}"]`).forEach(b => b.classList.remove('active'));
-
+      
       // Marcar botón activo
       btn.classList.add('active');
 
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   function updateStepper(step, shouldScrollTop = true) {
     currentStep = step;
-
+    
     const percentage = ((step - 1) / (totalSteps - 1)) * 100;
     if (progressFill) {
       progressFill.style.width = `${percentage}%`;
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rNivel = document.querySelectorAll('input[name="nivelInteres"]');
       const checkedNivel = Array.from(rNivel).some(r => r.checked);
       const gridNiveles = document.getElementById('gridNiveles').closest('.input-group');
-
+      
       if (!checkedNivel) {
         gridNiveles.classList.add('invalid');
         isValid = false;
