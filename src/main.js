@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Desmarcar otros botones del mismo grupo
       document.querySelectorAll(`.emoji-btn[data-field="${fieldName}"]`).forEach(b => b.classList.remove('active'));
-      
+
       // Marcar botón activo
       btn.classList.add('active');
 
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   function updateStepper(step, shouldScrollTop = true) {
     currentStep = step;
-    
+
     const percentage = ((step - 1) / (totalSteps - 1)) * 100;
     if (progressFill) {
       progressFill.style.width = `${percentage}%`;
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rNivel = document.querySelectorAll('input[name="nivelInteres"]');
       const checkedNivel = Array.from(rNivel).some(r => r.checked);
       const gridNiveles = document.getElementById('gridNiveles').closest('.input-group');
-      
+
       if (!checkedNivel) {
         gridNiveles.classList.add('invalid');
         isValid = false;
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. ENVÍO DE DATOS Y CONEXIÓN CON GOOGLE SHEETS (GOOGLE DRIVE)
   // =========================================================================
   // URL oficial de Google Apps Script para guardar respuestas en Google Sheets
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwIDGIbFAkMFlA7RZ2ApmVA2LUX9R_XxK8eseD1TLLtzF6_i9FWE6OKGfwUZOelwUCK/exec";
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzzfh_LXwJC4WA8al5NhR2EqLmJHWZw9MqmEVvBnER2q1GPyXRIpWbGquY8IruXhU6XaA/exec";
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
