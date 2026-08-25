@@ -12,9 +12,9 @@
     content="Encuesta rápida e interactiva de atención a familias y aspirantes del Colegio Nuestra Señora de Nazareth." />
 
   <!-- Favicon institucional (Escudo Colegio Ntra. Sra. de Nazareth) -->
-  <link rel="icon" type="image/png" href="/escudo-nazareth.png">
-  <link rel="shortcut icon" type="image/png" href="/escudo-nazareth.png">
-  <link rel="apple-touch-icon" href="/escudo-nazareth.png">
+  <link rel="icon" type="image/png" href="./escudo-nazareth.png">
+  <link rel="shortcut icon" type="image/png" href="./escudo-nazareth.png">
+  <link rel="apple-touch-icon" href="./escudo-nazareth.png">
 
   <!-- Fuente Google Fonts (Inter) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,57 +34,59 @@
 
   <main class="main-wrapper">
 
-    <!-- BANNER HERO SUPERIOR (Se oculta al enviar la encuesta) -->
-    <section class="hero-section" id="heroSection">
-      <div class="school-logo-wrapper">
-        <img src="./escudo-nazareth.png" alt="Escudo Colegio Ntra. Sra. de Nazareth" class="school-hero-crest">
-      </div>
-      <div class="school-header-badge">
-        <span>COLEGIO NTRA. SRA. DE NAZARETH — PURIFICACIÓN</span>
-      </div>
-      <h1 class="hero-title"> ¡Tu Opinión nos ayuda a mejorar! </h1>
-      <p class="hero-subtitle">
-        Tu opinión es muy valiosa para nosotros. Ayúdanos respondiendo estas 3 breves preguntas. ¡No te tomará ni 1
-        minuto!
-      </p>
-    </section>
-
-    <!-- CONTENEDOR PRINCIPAL DEL FORMULARIO INTERACTIVO -->
-    <div class="form-card-container">
-
-      <!-- BARRA NAVEGADORA PASO A PASO (STEPPER DE 3 PASOS) -->
-      <div class="stepper-wrapper">
-        <div class="progress-bar-background">
-          <div class="progress-bar-fill" id="progressFill"></div>
+    <div class="desktop-split-container">
+      
+      <!-- COLUMNA IZQUIERDA (EN PC: ESCUDO, NOMBRE, TÍTULO, SUBTÍTULO Y STEPPER) -->
+      <section class="left-hero-panel" id="heroSection">
+        <div class="school-logo-wrapper">
+          <img src="./escudo-nazareth.png" alt="Escudo Colegio Ntra. Sra. de Nazareth" class="school-hero-crest">
         </div>
+        <div class="school-header-badge">
+          <span>COLEGIO NTRA. SRA. DE NAZARETH — PURIFICACIÓN</span>
+        </div>
+        <h1 class="hero-title">¡Tu Opinión nos ayuda a mejorar!</h1>
+        <p class="hero-subtitle">
+          Tu opinión es muy valiosa para nosotros. Ayúdanos respondiendo estas 3 breves preguntas. ¡No te tomará ni 1 minuto!
+        </p>
 
-        <div class="step-item active" data-step="1">
-          <div class="step-circle">
-            <i class="fa-solid fa-child"></i>
-            <span class="step-check"><i class="fa-solid fa-check"></i></span>
+        <!-- BARRA NAVEGADORA PASO A PASO (STEPPER DE 3 PASOS EN PANEL IZQUIERDO) -->
+        <div class="stepper-wrapper">
+          <div class="progress-bar-background">
+            <div class="progress-bar-fill" id="progressFill"></div>
           </div>
-          <span class="step-label">1. ¿Qué buscas?</span>
-        </div>
 
-        <div class="step-item" data-step="2">
-          <div class="step-circle">
-            <i class="fa-solid fa-comments"></i>
-            <span class="step-check"><i class="fa-solid fa-check"></i></span>
+          <div class="step-item active" data-step="1">
+            <div class="step-circle">
+              <i class="fa-solid fa-child"></i>
+              <span class="step-check"><i class="fa-solid fa-check"></i></span>
+            </div>
+            <span class="step-label">1. ¿Qué buscas?</span>
           </div>
-          <span class="step-label">2. La Atención</span>
-        </div>
 
-        <div class="step-item" data-step="3">
-          <div class="step-circle">
-            <i class="fa-solid fa-heart"></i>
-            <span class="step-check"><i class="fa-solid fa-check"></i></span>
+          <div class="step-item" data-step="2">
+            <div class="step-circle">
+              <i class="fa-solid fa-comments"></i>
+              <span class="step-check"><i class="fa-solid fa-check"></i></span>
+            </div>
+            <span class="step-label">2. La Atención</span>
           </div>
-          <span class="step-label">3. Tu Opinión</span>
-        </div>
-      </div>
 
-      <!-- FORMULARIO INTERACTIVO -->
-      <form id="satisfaccionForm" class="form-content" novalidate>
+          <div class="step-item" data-step="3">
+            <div class="step-circle">
+              <i class="fa-solid fa-heart"></i>
+              <span class="step-check"><i class="fa-solid fa-check"></i></span>
+            </div>
+            <span class="step-label">3. Tu Opinión</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMNA DERECHA (EN PC: TARJETA DEL FORMULARIO CON OTRO COLOR EGANTE) -->
+      <div class="right-form-panel">
+        <div class="form-card-container">
+
+          <!-- FORMULARIO INTERACTIVO -->
+          <form id="satisfaccionForm" class="form-content" novalidate>
 
         <!-- ================= PASO 1: DATOS BÁSICOS Y GRADO ================= -->
         <div class="form-step-page active" id="step1">
@@ -140,26 +142,26 @@
             <span class="error-msg text-center">Por favor elige una opción</span>
           </div>
 
-          <div class="grid-2-col" style="margin-top: 1.5rem;">
-            <div class="input-group">
-              <label for="telefono">Tu Celular o WhatsApp de contacto <span class="required">*</span></label>
+          <div class="grid-2-col" style="margin-top: 1.1rem; gap: 0.85rem; display: grid; grid-template-columns: 1fr 1fr; align-items: start;">
+            <div class="input-group" style="margin-bottom: 0; display: flex; flex-direction: column;">
+              <label for="telefono" style="font-size: 0.875rem; font-weight: 600; color: #0f172a; margin-bottom: 0.4rem; min-height: 2.8rem; display: flex; align-items: flex-end;">Tu Celular o WhatsApp de contacto <span class="required" style="margin-left: 2px;">*</span></label>
               <div class="input-icon-wrapper">
                 <i class="fa-brands fa-whatsapp input-icon"></i>
-                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 300 000 0000" minlength="10" required>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 300 123 4567" minlength="10" style="height: 46px; border-radius: 12px; box-sizing: border-box; width: 100%;" required>
               </div>
               <span class="error-msg">Por favor escribe tu número telefónico (mínimo 10 dígitos)</span>
             </div>
 
-            <div class="input-group">
-              <label for="nombreCompleto">Tu Nombre (Opcional)</label>
+            <div class="input-group" style="margin-bottom: 0; display: flex; flex-direction: column;">
+              <label for="nombreCompleto" style="font-size: 0.875rem; font-weight: 600; color: #0f172a; margin-bottom: 0.4rem; min-height: 2.8rem; display: flex; align-items: flex-end;">Tu Nombre (Opcional)</label>
               <div class="input-icon-wrapper">
                 <i class="fa-regular fa-user input-icon"></i>
-                <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Escribe tu nombre si deseas">
+                <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Escribe tu nombre" style="height: 46px; border-radius: 12px; box-sizing: border-box; width: 100%;">
               </div>
             </div>
           </div>
 
-          <div class="step-actions">
+          <div class="step-actions" style="margin-top: 0.85rem;">
             <div></div>
             <button type="button" class="btn-primary btn-next" data-next="2">
               Siguiente <i class="fa-solid fa-arrow-right"></i>
@@ -252,10 +254,10 @@
                 Otras...</button>
             </div>
 
-            <!-- Campo desplegable para especificar otra opción -->
-            <div class="input-group hidden" id="wrapperOtrasEspecifique" style="margin-top: 0.9rem;">
-              <label for="otrasEspecifique" style="font-size: 0.85rem; font-weight: 600; color: #cbd5e1;">
-                ¿Qué otra cosa te gustó? Escríbela aquí:
+            <!-- Campo desplegable para especificar otra opción con separación limpia -->
+            <div class="input-group hidden" id="wrapperOtrasEspecifique" style="margin-top: 1rem; padding-top: 0.85rem; border-top: 1px dashed #cbd5e1;">
+              <label for="otrasEspecifique" style="font-size: 0.85rem; font-weight: 700; color: #0f172a;">
+                ✨ ¿Qué otra cosa te gustó? Escríbela aquí:
               </label>
               <div class="input-icon-wrapper">
                 <i class="fa-solid fa-pen input-icon"></i>
@@ -286,14 +288,14 @@
           </div>
 
           <div class="input-group">
-            <label for="comentariosSugerencias" style="line-height: 1.45; margin-bottom: 0.6rem;">
-              <i class="fa-regular fa-comment-dots"></i> De acuerdo con la información que te brindamos y la experiencia
-              con nosotros, por favor enúncianos las oportunidades de mejora.
+            <label for="comentariosSugerencias" style="line-height: 1.45; margin-bottom: 0.6rem; color: #0f172a; font-weight: 600;">
+              <i class="fa-regular fa-comment-dots"></i> De acuerdo con la información que te brindamos y la experiencia con nosotros, por favor, indícanos qué oportunidades de mejora crees que tenemos como colegio. Para nosotros son muy importantes tus apreciaciones. <span class="required">*</span>
             </label>
             <div class="input-icon-wrapper textarea-wrapper">
               <textarea id="comentariosSugerencias" name="comentariosSugerencias" rows="4"
-                placeholder="Escribe aquí si tienes alguna sugerencia u oportunidad de mejora..."></textarea>
+                placeholder="Escribe aquí tus apreciaciones u oportunidades de mejora..." required></textarea>
             </div>
+            <span class="error-msg">Por favor, déjanos tus apreciaciones u oportunidades de mejora (campo obligatorio)</span>
           </div>
 
           <!-- Aceptación obligatoria de tratamiento de datos personales -->
@@ -306,7 +308,7 @@
                   class="required">*</span>
               </span>
             </label>
-            <span class="error-msg" id="errPoliticas">Debes marcar la casilla para enviar la encuesta</span>
+            <span class="error-msg" id="errPoliticas"><i class="fa-solid fa-circle-exclamation"></i> Por favor, autoriza el uso de tus datos para poder enviar la encuesta</span>
           </div>
 
           <div class="step-actions">
@@ -325,12 +327,11 @@
       <div class="success-screen hidden" id="successScreen">
         <div class="success-card">
           <div class="success-icon-badge">
-            <i class="fa-solid fa-heart"></i>
+            <span style="font-size: 2.2rem; display: inline-flex; align-items: center; justify-content: center; line-height: 1;">💙</span>
           </div>
-          <h2 class="success-title">¡Muchas Gracias por tu Visita! 💙</h2>
+          <h2 class="success-title">¡Muchas Gracias por tu Visita!</h2>
           <p class="success-desc">
-            Tus respuestas nos ayudan a atender siempre con alegría y cariño a cada familia que se acerca al Colegio
-            Nazareth.
+            Tus respuestas nos ayudan a atender siempre con alegría y cariño a cada familia que se acerca al Colegio Nazareth.
           </p>
 
           <div class="success-actions">
@@ -341,12 +342,14 @@
         </div>
       </div>
 
+        </div>
+      </div>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="footer-container">
-      <p>© 2026 Colegio Nuestra Señora de Nazareth - Purificación, Tolima.</p>
+      <p>Colegio Nuestra Señora de Nazareth — Purificación, Tolima</p>
     </div>
   </footer>
 
