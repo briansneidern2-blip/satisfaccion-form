@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Codificación de caracteres estándar UTF-8 -->
+  <meta charset="UTF-8" />
+  <!-- Adaptación para celulares, tablets y computadores -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Título oficial simplificado -->
+  <title>¿Cómo fue tu experiencia hoy? | Colegio Ntra. Sra. de Nazareth</title>
+  <meta name="description"
+    content="Encuesta rápida e interactiva de atención a familias y aspirantes del Colegio Nuestra Señora de Nazareth." />
+
+  <!-- Favicon institucional (Escudo Colegio Ntra. Sra. de Nazareth) -->
+  <link rel="icon" type="image/png" href="./escudo-nazareth.png">
+  <link rel="shortcut icon" type="image/png" href="./escudo-nazareth.png">
+  <link rel="apple-touch-icon" href="./escudo-nazareth.png">
+
+  <!-- Fuente Google Fonts (Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Iconos Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Hoja de estilos institucionales Navy -->
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+
+<body>
+
+  <main class="main-wrapper">
+
+    <div class="desktop-split-container">
+      
+      <!-- COLUMNA IZQUIERDA (EN PC: ESCUDO, NOMBRE, TÍTULO, SUBTÍTULO Y STEPPER) -->
+      <section class="left-hero-panel" id="heroSection">
+        <div class="school-logo-wrapper">
+          <img src="./escudo-nazareth.png" alt="Escudo Colegio Ntra. Sra. de Nazareth" class="school-hero-crest">
+        </div>
+        <div class="school-header-badge">
+          <span>COLEGIO NTRA. SRA. DE NAZARETH — PURIFICACIÓN</span>
+        </div>
+        <h1 class="hero-title">¡Tu Opinión nos ayuda a mejorar!</h1>
+        <p class="hero-subtitle">
+          Tu opinión es muy valiosa para nosotros. Ayúdanos respondiendo estas 3 breves preguntas. ¡No te tomará ni 1 minuto!
+        </p>
+
+        <!-- BARRA NAVEGADORA PASO A PASO (STEPPER DE 3 PASOS EN PANEL IZQUIERDO) -->
+        <div class="stepper-wrapper">
+          <div class="progress-bar-background">
+            <div class="progress-bar-fill" id="progressFill"></div>
+          </div>
+
+          <div class="step-item active" data-step="1">
+            <div class="step-circle">
+              <i class="fa-solid fa-child"></i>
+              <span class="step-check"><i class="fa-solid fa-check"></i></span>
+            </div>
+            <span class="step-label">1. ¿Qué buscas?</span>
+          </div>
+
+          <div class="step-item" data-step="2">
+            <div class="step-circle">
+              <i class="fa-solid fa-comments"></i>
+              <span class="step-check"><i class="fa-solid fa-check"></i></span>
+            </div>
+            <span class="step-label">2. La Atención</span>
+          </div>
+
+          <div class="step-item" data-step="3">
+            <div class="step-circle">
+              <i class="fa-solid fa-heart"></i>
+              <span class="step-check"><i class="fa-solid fa-check"></i></span>
+            </div>
+            <span class="step-label">3. Tu Opinión</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUMNA DERECHA (EN PC: TARJETA DEL FORMULARIO CON OTRO COLOR EGANTE) -->
+      <div class="right-form-panel">
+        <div class="form-card-container">
+
+          <!-- FORMULARIO INTERACTIVO -->
+          <form id="satisfaccionForm" class="form-content" novalidate>
+
+        <!-- ================= PASO 1: DATOS BÁSICOS Y GRADO ================= -->
+        <div class="form-step-page active" id="step1">
+          <div class="step-header">
+            <h2 class="step-title">¿Para qué grado o nivel buscas información? 🎒</h2>
+            <p class="step-subtitle">Toca una de las opciones para seleccionar el nivel de tu interés:</p>
+          </div>
+
+          <!-- SELECCIÓN INTERACTIVA POR TARJETAS DE NIVELES -->
+          <div class="input-group">
+            <div class="radio-cards-grid" id="gridNiveles">
+              <label class="radio-card">
+                <input type="radio" name="nivelInteres" value="Preescolar" required>
+                <div class="card-box">
+                  <div class="card-icon"><img src="./icon-preescolar.png" alt="Preescolar" class="level-icon-img"></div>
+                  <div class="card-title">Preescolar</div>
+                  <div class="card-desc">Pre-jardin, Jardín, Transición</div>
+                  <i class="fa-solid fa-circle-check card-check"></i>
+                </div>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="nivelInteres" value="Primaria">
+                <div class="card-box">
+                  <div class="card-icon"><img src="./icon-primaria.png" alt="Primaria" class="level-icon-img"></div>
+                  <div class="card-title">Primaria</div>
+                  <div class="card-desc">Grado 1° a 5°</div>
+                  <i class="fa-solid fa-circle-check card-check"></i>
+                </div>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="nivelInteres" value="Bachillerato">
+                <div class="card-box">
+                  <div class="card-icon"><img src="./icon-secundaria.png" alt="Bachillerato" class="level-icon-img">
+                  </div>
+                  <div class="card-title">Bachillerato</div>
+                  <div class="card-desc">Grado 6° a 11°</div>
+                  <i class="fa-solid fa-circle-check card-check"></i>
+                </div>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="nivelInteres" value="Varios Niveles">
+                <div class="card-box">
+                  <div class="card-icon"><img src="./icon-otros.png" alt="Varios Niveles" class="level-icon-img"></div>
+                  <div class="card-title">Varios Niveles</div>
+                  <div class="card-desc">Tengo más de un hijo/a</div>
+                  <i class="fa-solid fa-circle-check card-check"></i>
+                </div>
+              </label>
+            </div>
+            <span class="error-msg text-center">Por favor elige una opción</span>
+          </div>
+
+          <div class="grid-2-col" style="margin-top: 1.1rem; gap: 0.85rem; display: grid; grid-template-columns: 1fr 1fr; align-items: start;">
+            <div class="input-group" style="margin-bottom: 0; display: flex; flex-direction: column;">
+              <label for="telefono" style="font-size: 0.875rem; font-weight: 600; color: #0f172a; margin-bottom: 0.4rem; min-height: 2.8rem; display: flex; align-items: flex-end;">Tu Celular o WhatsApp de contacto <span class="required" style="margin-left: 2px;">*</span></label>
+              <div class="input-icon-wrapper">
+                <i class="fa-brands fa-whatsapp input-icon"></i>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 300 123 4567" minlength="10" style="height: 46px; border-radius: 12px; box-sizing: border-box; width: 100%;" required>
+              </div>
+              <span class="error-msg">Por favor escribe tu número telefónico (mínimo 10 dígitos)</span>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 0; display: flex; flex-direction: column;">
+              <label for="nombreCompleto" style="font-size: 0.875rem; font-weight: 600; color: #0f172a; margin-bottom: 0.4rem; min-height: 2.8rem; display: flex; align-items: flex-end;">Tu Nombre (Opcional)</label>
+              <div class="input-icon-wrapper">
+                <i class="fa-regular fa-user input-icon"></i>
+                <input type="text" id="nombreCompleto" name="nombreCompleto" placeholder="Escribe tu nombre" style="height: 46px; border-radius: 12px; box-sizing: border-box; width: 100%;">
+              </div>
+            </div>
+          </div>
+
+          <div class="step-actions" style="margin-top: 0.85rem;">
+            <div></div>
+            <button type="button" class="btn-primary btn-next" data-next="2">
+              Siguiente <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= PASO 2: EVALUACIÓN CON CARITAS EXPRESIVAS ================= -->
+        <div class="form-step-page" id="step2">
+          <div class="step-header">
+            <h2 class="step-title">¿Cómo te pareció la atención? 💬</h2>
+            <p class="step-subtitle">Toca la carita que mejor represente cómo te sentiste hoy:</p>
+          </div>
+
+          <!-- CONTENEDOR GRID DE 2 COLUMNAS SIMÉTRICAS EN PC PARA LAS DOS CARDS SUPERIORES -->
+          <div class="step2-cards-grid">
+            <!-- EVALUACIÓN 1: CLARIDAD DE LA INFORMACIÓN -->
+            <div class="emoji-question-block" id="card_claridadInfo">
+              <label class="emoji-question-title">
+                1. ¿Qué tan clara fue la información de precios, matrículas y documentos? <span
+                  class="required">*</span>
+              </label>
+              <div class="emoji-options-grid">
+                <button type="button" class="emoji-btn" data-field="claridadInfo" data-val="Excelente">
+                  <span class="emoji-face">😄</span>
+                  <span class="emoji-label">Súper clara</span>
+                </button>
+                <button type="button" class="emoji-btn" data-field="claridadInfo" data-val="Buena">
+                  <span class="emoji-face">🙂</span>
+                  <span class="emoji-label">Buena</span>
+                </button>
+                <button type="button" class="emoji-btn" data-field="claridadInfo" data-val="Regular">
+                  <span class="emoji-face">😐</span>
+                  <span class="emoji-label">Regular</span>
+                </button>
+                <button type="button" class="emoji-btn" data-field="claridadInfo" data-val="Poco clara">
+                  <span class="emoji-face">🙁</span>
+                  <span class="emoji-label">Poco clara</span>
+                </button>
+              </div>
+              <input type="hidden" id="claridadInfo" name="claridadInfo" value="">
+              <span class="error-msg text-center">Toca una carita para responder</span>
+            </div>
+
+            <!-- EVALUACIÓN 2: AMABILIDAD Y TRATO -->
+            <div class="emoji-question-block" id="card_amabilidad">
+              <label class="emoji-question-title">
+                2. ¿Cómo te trató la persona que te atendió? <span class="required">*</span>
+              </label>
+              <div class="emoji-options-grid">
+                <button type="button" class="emoji-btn" data-field="amabilidad" data-val="Muy amable">
+                  <span class="emoji-face">❤️</span>
+                  <span class="emoji-label">Muy amable</span>
+                </button>
+                <button type="button" class="emoji-btn" data-field="amabilidad" data-val="Bien">
+                  <span class="emoji-face">🙂</span>
+                  <span class="emoji-label">Bien</span>
+                </button>
+                <button type="button" class="emoji-btn" data-field="amabilidad" data-val="Normal">
+                  <span class="emoji-face">😐</span>
+                  <span class="emoji-label">Normal</span>
+                </button>
+                <button type="button" class="emoji-btn" data-field="amabilidad" data-val="Frío">
+                  <span class="emoji-face">🙁</span>
+                  <span class="emoji-label">Distante</span>
+                </button>
+              </div>
+              <input type="hidden" id="amabilidad" name="amabilidad" value="">
+              <span class="error-msg text-center">Toca una carita para responder</span>
+            </div>
+          </div>
+
+          <!-- NUBE INTERACTIVA DE ASPECTOS DESTACADOS -->
+          <div class="tags-section" id="tagsAspectosSection">
+            <label class="tags-label">
+              👍 ¿Qué fue lo que más te gustó de tu consulta? (Toca lo que quieras) <span class="required">*</span>
+            </label>
+            <div class="tags-cloud">
+              <button type="button" class="tag-pill" data-val="Las instalaciones y salones"><i
+                  class="fa-solid fa-plus"></i> 🏫 Las instalaciones</button>
+              <button type="button" class="tag-pill" data-val="La educación en valores"><i class="fa-solid fa-plus"></i>
+                💛 La educación en valores</button>
+              <button type="button" class="tag-pill" data-val="La atención tan amable"><i class="fa-solid fa-plus"></i>
+                💬 La atención amable</button>
+              <button type="button" class="tag-pill" data-val="La calidad de los profesores"><i
+                  class="fa-solid fa-plus"></i> 🎓 La calidad académica</button>
+              <button type="button" class="tag-pill" data-val="Los precios y facilidades"><i
+                  class="fa-solid fa-plus"></i> 💲 Precios y facilidades</button>
+              <button type="button" class="tag-pill" data-val="Otras" id="tagOtras"><i class="fa-solid fa-plus"></i> ✨
+                Otras...</button>
+            </div>
+
+            <!-- Campo desplegable para especificar otra opción con separación limpia -->
+            <div class="input-group hidden" id="wrapperOtrasEspecifique" style="margin-top: 1rem; padding-top: 0.85rem; border-top: 1px dashed #cbd5e1;">
+              <label for="otrasEspecifique" style="font-size: 0.85rem; font-weight: 700; color: #0f172a;">
+                ✨ ¿Qué otra cosa te gustó? Escríbela aquí:
+              </label>
+              <div class="input-icon-wrapper">
+                <i class="fa-solid fa-pen input-icon"></i>
+                <input type="text" id="otrasEspecifique" name="otrasEspecifique"
+                  placeholder="Escribe aquí tu respuesta...">
+              </div>
+            </div>
+
+            <input type="hidden" id="aspectosSeleccionados" name="aspectosSeleccionados" value="">
+            <span class="error-msg" id="errAspectos">Toca al menos una opción que te haya gustado</span>
+          </div>
+
+          <div class="step-actions">
+            <button type="button" class="btn-secondary btn-prev" data-prev="1">
+              <i class="fa-solid fa-arrow-left"></i> Anterior
+            </button>
+            <button type="button" class="btn-primary btn-next" data-next="3">
+              Siguiente <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= PASO 3: OPINIÓN FINAL Y SUGERENCIAS ================= -->
+        <div class="form-step-page" id="step3">
+          <div class="step-header">
+            <h2 class="step-title">Tu opinión final 🌟</h2>
+            <p class="step-subtitle">Tu opinión es fundamental para ayudarnos a mejorar cada día:</p>
+          </div>
+
+          <div class="input-group">
+            <label for="comentariosSugerencias" style="line-height: 1.45; margin-bottom: 0.6rem; color: #0f172a; font-weight: 600;">
+              <i class="fa-regular fa-comment-dots"></i> De acuerdo con la información que te brindamos y la experiencia con nosotros, por favor, indícanos qué oportunidades de mejora crees que tenemos como colegio. Para nosotros son muy importantes tus apreciaciones. <span class="required">*</span>
+            </label>
+            <div class="input-icon-wrapper textarea-wrapper">
+              <textarea id="comentariosSugerencias" name="comentariosSugerencias" rows="4"
+                placeholder="Escribe aquí tus apreciaciones u oportunidades de mejora..." required></textarea>
+            </div>
+            <span class="error-msg">Por favor, déjanos tus apreciaciones u oportunidades de mejora (campo obligatorio)</span>
+          </div>
+
+          <!-- Aceptación obligatoria de tratamiento de datos personales -->
+          <div class="policy-checkbox-container">
+            <label class="custom-checkbox-label">
+              <input type="checkbox" id="aceptaPoliticas" name="aceptaPoliticas" required>
+              <span class="checkbox-custom"></span>
+              <span class="policy-text">
+                Autorizo el uso de mis datos únicamente para recibir información sobre admisiones. <span
+                  class="required">*</span>
+              </span>
+            </label>
+            <span class="error-msg" id="errPoliticas"><i class="fa-solid fa-circle-exclamation"></i> Por favor, autoriza el uso de tus datos para poder enviar la encuesta</span>
+          </div>
+
+          <div class="step-actions">
+            <button type="button" class="btn-secondary btn-prev" data-prev="2">
+              <i class="fa-solid fa-arrow-left"></i> Anterior
+            </button>
+            <button type="submit" class="btn-submit" id="btnSubmitForm">
+              <span>Enviar Encuesta</span> <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- ================= PANTALLA DE ÉXITO DE AGRADECIMIENTO ================= -->
+      <div class="success-screen hidden" id="successScreen">
+        <div class="success-card">
+          <div class="success-icon-badge">
+            <span style="font-size: 2.2rem; display: inline-flex; align-items: center; justify-content: center; line-height: 1;">💙</span>
+          </div>
+          <h2 class="success-title">¡Muchas Gracias por tu Visita!</h2>
+          <p class="success-desc">
+            Tus respuestas nos ayudan a atender siempre con alegría y cariño a cada familia que se acerca al Colegio Nazareth.
+          </p>
+
+          <div class="success-actions">
+            <button type="button" class="btn-primary" id="btnResetForm">
+              <i class="fa-solid fa-rotate-left"></i> Responder otra vez
+            </button>
+          </div>
+        </div>
+      </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p>Colegio Nuestra Señora de Nazareth — Purificación, Tolima</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
